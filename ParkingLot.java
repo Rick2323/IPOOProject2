@@ -166,7 +166,6 @@ public class ParkingLot
         ArrayList<Pack> packsInContainer = null;
         boolean found = false;
         if(containerCode >= 0){
-            //for(int i=0; i<numberOfContainers; i++){ //percorre o parque
             for(ParkingSpot slot: parkingLot.values())
                 if(slot.getParked().getClass().getName().equals("Container"))
                     if(((Container) slot.getParked()).getCode() == containerCode){ //à procura de um com o mesmo codigo
@@ -184,13 +183,21 @@ public class ParkingLot
         return packsInContainer;
     }
 
-    /**
-     * Permite saber se determinado contentor existe no parque e devolve um numero inteiro.
-     * 
-     * @param  containerCode   O codigo do contentor.
-     * 
-     */
-    public int containerExists(int containerCode){  //se ve um contentor(codigo) ja existe no parque, se sim dá a sua posisão, usado na garagem
+    public void loadContainer(int containerCode, Pack pack){
+        if(pack != null)
+            for(ParkingSpot slot: parkingLot.values())
+                if(slot.getParked().getClass().getName().equals("Container"))
+                    if(((Container) slot.getParked()).getCode() == containerCode)
+                        ((Container) slot.getParked()).loadContainer(pack);
+    }        
+    
+        /**
+         * Permite saber se determinado contentor existe no parque e devolve um numero inteiro.
+         * 
+         * @param  containerCode   O codigo do contentor.
+         * 
+         */
+        public int containerExists(int containerCode){  //se ve um contentor(codigo) ja existe no parque, se sim dá a sua posisão, usado na garagem
         for(Map.Entry<Integer, ParkingSpot> entry:parkingLot.entrySet())
             if(((Container)entry.getValue().getParked()).getCode()==containerCode)
                 return(int)entry.getKey();        

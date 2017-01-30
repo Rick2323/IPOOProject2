@@ -55,7 +55,7 @@ public class ProductManagement
             if(productIsRegisted(code))
                 registedProducts.remove(code);
             else
-                System.out.println("O Produto Não Está Registado!");
+                System.out.println("O Produto Com O Código " + code + " Não Está Registado!");
         else
             System.out.println("Código Inválido!");
     }

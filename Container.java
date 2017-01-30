@@ -227,11 +227,10 @@ public class Container
         if(containerHasValidCode()){
             ArrayList<Pack> packsInContainer = new ArrayList<Pack>();
 
-            if(!packsInContainer.isEmpty())     
-                for(Pack pack : listOfPacks){
-                    packsInContainer.add(pack);
-                    listOfPacks.remove(pack);
-                }
+            if(!listOfPacks.isEmpty()){                
+                packsInContainer.addAll(listOfPacks);
+                listOfPacks.clear();
+            }                
             else
                 System.out.print("Contentor Vazio!");
 

@@ -2,4 +2,12 @@
 comment0.params=
 comment0.target=SalesList()
 comment0.text=\r\n\ COnstrutor\ para\ objetos\ da\ classe\ SalesList\r\n
-numComments=1
+comment1.params=code
+comment1.target=boolean\ codeIsValid(java.lang.Integer)
+comment2.params=code
+comment2.target=void\ addProductToSell(java.lang.Integer)
+comment3.params=code
+comment3.target=boolean\ productCanBeSold(java.lang.Integer)
+comment4.params=code
+comment4.target=void\ removeProductToSell(java.lang.Integer)
+numComments=5

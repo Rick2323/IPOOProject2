@@ -18,6 +18,7 @@ import java.util.*; //ser mais preciso
     private Storage storage;
     private ParkingLot parking;
     private Coordinates position;
+    private SalesList salesList;
 
     public Shop(String name, double latitude, double longitude)
     {
@@ -30,6 +31,7 @@ import java.util.*; //ser mais preciso
         position = new Coordinates (latitude, longitude);
         storage = new Storage(); 
         parking = new ParkingLot(2); 
+        salesList = new SalesList();
     }   
 
     /**
@@ -68,11 +70,23 @@ import java.util.*; //ser mais preciso
      * @param   containerCode    O codigo do contentor dado por um número inteiro.
      * 
      */public void unloadContainerFully(int containerCode){
-        ArrayList<Pack> packsToStorage = parking.unloadContainerFully(containerCode);
+        ArrayList<Pack> packsToStorage = new ArrayList<Pack>();        
+        packsToStorage.addAll(parking.unloadContainerFully(containerCode));
+        
+        ArrayList<Pack> packsToRemove = new ArrayList<Pack>();
 
-        if(packsToStorage != null)
+        if(packsToStorage != null && !packsToStorage.isEmpty())
             for(Pack pack: packsToStorage)
-                storage.importPack(pack);        
+                if(salesList.productCanBeSold(pack.getCode())){
+                    storage.importPack(pack);
+                    packsToRemove.add(pack);                    
+                }
+                
+        packsToStorage.removeAll(packsToRemove);
+
+        if(!packsToStorage.isEmpty())
+            for(Pack pack: packsToStorage)
+                parking.loadContainer(containerCode, pack);
     }
 
     /**
@@ -86,7 +100,8 @@ import java.util.*; //ser mais preciso
         Pack packToStorage = parking.unloadContainerSingle(containerCode, packCode, quantity);
 
         if(packToStorage != null)
-            storage.importPack(packToStorage);
+            if(salesList.productCanBeSold(packToStorage.getCode()))
+                storage.importPack(packToStorage);
     }
 
     /**
@@ -98,6 +113,14 @@ import java.util.*; //ser mais preciso
      * 
      */public Pack sell(int packCode,int quantity){
         return storage.exportPack(packCode, quantity);        
+    }
+
+    public void addProductToSell(Integer code){
+        salesList.addProductToSell(code);
+    }
+
+    public void removeProductToSell(Integer code){
+        salesList.removeProductToSell(code);
     }
 
     /**
