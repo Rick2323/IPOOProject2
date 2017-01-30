@@ -14,4 +14,6 @@ comment4.params=
 comment4.target=void\ testSetDesignation()
 comment5.params=
 comment5.target=void\ testSetParked()
-numComments=6
+comment6.params=
+comment6.target=void\ testGetDesignation()
+numComments=7
