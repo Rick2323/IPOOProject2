@@ -59,7 +59,7 @@ public class ParkingLot
         return true;
     }
 
-    private boolean hasSpace(){
+    public boolean hasSpace(){
         return parkingLot.size() < PARKING_SPACE;
     }
 
@@ -138,7 +138,6 @@ public class ParkingLot
         boolean found = false;
         if(containerCode >= 0){
             for(ParkingSpot slot: parkingLot.values())
-            //for(int i=0; i<numberOfContainers; i++){
                 if(slot.getParked().getClass().getName().equals("Container"))
                     if(((Container) slot.getParked()).getCode() == containerCode){
                         pack = ((Container) slot.getParked()).unloadContainer((Integer) packCode, quantity);
