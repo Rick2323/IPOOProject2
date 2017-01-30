@@ -56,7 +56,9 @@
     public int getCode(){
         return code;
     }
-
+    public String getDesignation(){
+        return designation;
+    }
     public void setDesignation(String name){
         if(name != null)
             designation = name;

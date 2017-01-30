@@ -52,5 +52,21 @@ public class LorryTest
         Lorry lorry4 = new Lorry("Veiculo4", -5, 0.0, 0.0);
         assertEquals(0, lorry4.getCode());
     }
+
+    @Test
+    public void testSetDesignation()
+    {
+        Lorry lorry1 = new Lorry("Veiculo1", 1, 0.0, 0.0);
+        assertEquals("Veiculo1", lorry1.getDesignation());
+        Lorry lorry2 = new Lorry(null, 2, 0.0, 0.0);
+        assertEquals("", lorry2.getDesignation());
+        lorry1.setDesignation("Veiculo1");
+        assertEquals("Veiculo1", lorry1.getDesignation());
+        lorry2.setDesignation("");
+        assertEquals("", lorry2.getDesignation());
+        lorry1.setDesignation("Veiculo5");
+        assertEquals("Veiculo5", lorry1.getDesignation());
+    }
 }
+
 
