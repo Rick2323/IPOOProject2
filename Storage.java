@@ -57,24 +57,18 @@ import java.util.*;//ser mais preciso
                         if(storedPack.getQuantity() > quantity){
                             storedPack.removeQuantity(quantity);
                             hasCode = true;
-                            return copyPack(code, storedPack.getName(), quantity, storedPack.getWeight(), storedPack.getVolume());
-
+                            return copyPack(code, quantity);
                         }
-                        else if(packsInStorage[i].getQuantity() == quantity){                    
-                            Pack exportPack = copyPack(code, packsInStorage[i].getName(), quantity, packsInStorage[i].getWeight(), packsInStorage[i].getVolume());
+                        else if(storedPack.getQuantity() == quantity){                    
+                            Pack exportPack = copyPack(code, quantity);
                             hasCode = true;
-                            for (int j = i ; j < numberOfPacks ; j++){
-                                packsInStorage[j] = packsInStorage[j+1];                                                              
-                            }
-                            numberOfPacks--;  
-
+                            packsInStorage.remove(storedPack);
                             return exportPack;
                         }                     
                         else{
-                            packWithLowQuantity = packsInStorage[i];
+                            packWithLowQuantity = storedPack;
                             hasCode = true;
-                        }                    
-                
+                        }                                  
 
                 if(!hasCode)
                     System.out.println("O Pack Com o Código Introduzido Não Existe em Armazém!");             
@@ -91,8 +85,8 @@ import java.util.*;//ser mais preciso
         return null;
     }
 
-    private Pack copyPack(int code, String name, int quantity, double weight, double volume){//copia um pack já feito
-        return new Pack(code, name, quantity, weight, volume);        
+    private Pack copyPack(int code, int quantity){//copia um pack já feito
+        return new Pack(code, quantity);        
     }
 
     /**
@@ -100,11 +94,10 @@ import java.util.*;//ser mais preciso
      * 
      */public String toString(){
         String exportString = "";
-        if(numberOfPacks > 0){
+        if(!packsInStorage.isEmpty()){
             exportString = "*** Informação Sobre os Packs em Armazém ***\n";
-            for(int i=0; i < numberOfPacks; i++)
-                exportString += "Código: " + packsInStorage[i].getCode() + "\tNome: " + packsInStorage[i].getName() + "\t\tQuantidade: " + packsInStorage[i].getQuantity()
-                + "\t\tPeso: " + packsInStorage[i].getTotalWeight() + "\tVolume: " + packsInStorage[i].getTotalVolume() +"\n";
+            for(Pack storedPack: packsInStorage)
+                storedPack.toString();
         }
         else
             exportString = "Armazém vazio!";
