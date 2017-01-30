@@ -67,6 +67,20 @@ public class LorryTest
         lorry1.setDesignation("Veiculo5");
         assertEquals("Veiculo5", lorry1.getDesignation());
     }
+
+    @Test
+    public void testSetParked()
+    {
+        Lorry lorry2 = new Lorry("Veiculo1", 1, 0.0, 0.0);
+        assertEquals(false, lorry2.isParked());
+        lorry2.setParked();
+        assertEquals(true, lorry2.isParked());
+        Lorry lorry3 = new Lorry("Veiculo2", 2, 1.1, 1.1);
+        assertEquals(false, lorry3.isParked());
+        lorry3.setParked();
+        assertEquals(true, lorry3.isParked());
+    }
 }
+
 
 

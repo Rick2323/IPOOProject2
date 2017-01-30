@@ -73,7 +73,10 @@
         else
             parked = true;
     }
-
+    public boolean isParked(){
+    
+         return parked;
+    }
     /**
      * Permite carregar o camião com um contentor.
      * 
