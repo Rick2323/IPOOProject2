@@ -9,15 +9,9 @@ import java.util.*;//ser mais preciso
  */public class Storage
 {
     private ArrayList<Pack> packsInStorage;
-    private int availableSpace;
 
-    public Storage(int availableSpace)
+    public Storage()
     {
-        if(availableSpace > 0)
-            this.availableSpace = availableSpace;
-        else
-            this.availableSpace = 10; 
-
         packsInStorage = new ArrayList<Pack>();
     }
 
@@ -27,47 +21,21 @@ import java.util.*;//ser mais preciso
      * @param    pack    produto que se quer importar.
      * 
      */public void importPack(Pack pack){
-        boolean packExists = false;
         if(pack != null)
             if(!packsInStorage.isEmpty()){
 
                 for(Pack storedPack: packsInStorage)
                     if(storedPack.getCode() == pack.getCode()){
-                        packsInStorage[i].addQuantity(pack.getQuantity());
-                        packExists = true;
+                        storedPack.addQuantity(pack.getQuantity());
                         break;
                     }
 
-                for(int i=0; i < numberOfPacks; i++)
-                    if(packsInStorage[i].getCode() == pack.getCode()){
-                        packsInStorage[i].addQuantity(pack.getQuantity());
-                        packExists = true;
-                        break;
-                    }
-
-                if(!packExists){
-                    increaseArrayLength();
-                    packsInStorage[numberOfPacks] = pack; 
-                    numberOfPacks++;
-                }
             }
-            else{
-                packsInStorage[numberOfPacks] = pack;
-                numberOfPacks++;
-            }
+            else
+                packsInStorage.add(pack);
+            
         else
             System.out.print("Pack Inválido!");
-    }
-
-    private void increaseArrayLength(){//mantem os produtos e duplica a capacidade do array se for necessário.
-        if(!(numberOfPacks < packsInStorage.length)){
-            Pack[] copyOfPacksInStorage = new Pack[packsInStorage.length * 2];
-
-            for(int j=0; j < packsInStorage.length; j++)
-                copyOfPacksInStorage[j] = packsInStorage[j];
-
-            packsInStorage = copyOfPacksInStorage;
-        }
     }
 
     /**
@@ -84,12 +52,12 @@ import java.util.*;//ser mais preciso
 
         if(code >= 0){
             if(quantity > 0){
-                for (int i=0; i < numberOfPacks; i++){
-                    if(packsInStorage[i].getCode() == code)
-                        if(packsInStorage[i].getQuantity() > quantity){
-                            packsInStorage[i].removeQuantity(quantity);
+                for(Pack storedPack: packsInStorage)
+                    if(storedPack.getCode() == code)
+                        if(storedPack.getQuantity() > quantity){
+                            storedPack.removeQuantity(quantity);
                             hasCode = true;
-                            return copyPack(code, packsInStorage[i].getName(), quantity, packsInStorage[i].getWeight(), packsInStorage[i].getVolume());
+                            return copyPack(code, storedPack.getName(), quantity, storedPack.getWeight(), storedPack.getVolume());
 
                         }
                         else if(packsInStorage[i].getQuantity() == quantity){                    
@@ -106,7 +74,7 @@ import java.util.*;//ser mais preciso
                             packWithLowQuantity = packsInStorage[i];
                             hasCode = true;
                         }                    
-                }
+                
 
                 if(!hasCode)
                     System.out.println("O Pack Com o Código Introduzido Não Existe em Armazém!");             
