@@ -2,8 +2,9 @@ import java.util.*; //ser mais preciso
 /**
  * Escreva a descrição da classe ProductManagement aqui.
  * 
- * @author (seu nome) 
- * @version (número de versão ou data)
+ * @author 160221052  Ricardo Carmo.
+ * @author 160221072  Miguel Lobato.
+ * @version 31/1/2017
  */
 public class ProductManagement
 {    
@@ -19,8 +20,16 @@ public class ProductManagement
             return true;
         else
             return false;
-    }
+    }    
 
+    /**
+     * Regista o código do produto e a este fica associado um nome, peso e volume.
+     * 
+     * @param   code    Código do produto.
+     * @param   name    Nome do produto.
+     * @param   weight  Peso Unitário.
+     * @param   volume  Volume Unitário.
+     */  
     public void registerProduct(Integer code, String name, double weight, double volume){
         if(isValidProductInformation(code, name, weight, volume))
             registedProducts.put(code , name + "/" + weight + "/" + volume);
@@ -35,14 +44,24 @@ public class ProductManagement
             return false;
     }
 
-    public String getProductInformation(Integer code){ //PRIVATE??
+    /**
+     * Devolve uma String com a informação do produto no formato nome/peso/volume.    
+     * 
+     * @param code Código do produto.
+     */
+    public String getProductInformation(Integer code){
         if(productIsRegisted(code))
             return registedProducts.get(code);
-        else
-            System.out.println("O Produto Não Está Registado!");
+
+        System.out.println("O Produto Não Está Registado!");
         return null;
     }
 
+    /**
+     * Devolve verdadeiro ou falso, repetivamente, caso o produto com o código introduzido esteja registado.
+     * 
+     * @param   code    Código do produto
+     */
     public static boolean productIsRegisted(Integer code){
         if(codeIsValid(code) && registedProducts.containsKey(code))
             return true;
@@ -50,6 +69,11 @@ public class ProductManagement
             return false;
     }
 
+    /**
+     * Anula-se o registo de um produto se este estiver previamente registado.
+     * 
+     * @param   code    Código do produto
+     */
     public void unregisterProduct(Integer code){
         if(codeIsValid(code))
             if(productIsRegisted(code))
@@ -72,7 +96,7 @@ public class ProductManagement
 
         return exportString;   
     }
-    
+
     public void showRegistedProduct(){
         System.out.println(registedProductString());
     }
