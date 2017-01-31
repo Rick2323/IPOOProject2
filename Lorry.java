@@ -56,9 +56,11 @@
     public int getCode(){
         return code;
     }
+    
     public String getDesignation(){
         return designation;
     }
+    
     public void setDesignation(String name){
         if(name != null)
             designation = name;
@@ -73,10 +75,11 @@
         else
             parked = true;
     }
-    public boolean isParked(){
     
+    public boolean isParked(){    
          return parked;
     }
+    
     /**
      * Permite carregar o camião com um contentor.
      * 
@@ -139,9 +142,9 @@
     } 
 
     /**
-     * Permite saber a latitude de um camião e retorna um número real.
+     * Permite saber a latitude do camião e retorna um número real.
      * 
-     * @return   A latitude de um camião.
+     * @return   A latitude do camião.
      * 
      */
     public double getLatitude(){          //usado na classe shop
@@ -149,9 +152,9 @@
     }
 
     /**
-     * Permite saber a longitude de um camião e retorna um número real.
+     * Permite saber a longitude do camião e retorna um número real.
      * 
-     * @return   A longitude de um camião.
+     * @return   A longitude do camião.
      * 
      */
     public double getLongitude(){        //usado na classe shop
@@ -169,6 +172,10 @@
             return true;
         else
             return false;
+    }
+    
+    public Container getContainer(){
+        return container;
     }
 
     public double getTotalKilometers(){

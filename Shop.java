@@ -43,6 +43,26 @@ import java.util.*; //ser mais preciso
         if(name != null)
             this.name = name;
     }
+    
+    /**
+     * Permite saber a latitude da Loja e retorna um número real.
+     * 
+     * @return   A latitude da Loja.
+     * 
+     */
+    public double getLatitude(){        
+        return position.getLatitude();
+    }
+
+    /**
+     * Permite saber a longitude da Loja e retorna um número real.
+     * 
+     * @return   A longitude da Loja.
+     * 
+     */
+    public double getLongitude(){       
+        return position.getLongitude();
+    }
 
     /**
      * Permite descarregar o contentor de um camião para um lugar de estacionamento.

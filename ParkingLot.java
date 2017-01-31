@@ -7,7 +7,7 @@ import java.util.*; //ser mais preciso
  */
 public class ParkingLot
 {
-    private static HashMap<Integer, ParkingSpot> parkingLot;
+    private HashMap<Integer, ParkingSpot> parkingLot;
     private final int PARKING_SPACE;
     /**
      * COnstrutor para objetos da classe Parking

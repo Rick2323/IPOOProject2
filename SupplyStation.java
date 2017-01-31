@@ -42,10 +42,15 @@ import java.util.*;//ser mais preciso
         }
 
     }
+    
+    public ParkingLot getParking(){
+        return  parking;
+    }
 
     private void createEmptyContainers(int ammountOfEmptyContainers){
+        Container importContainer = null;
         for(int i=0; i<ammountOfEmptyContainers;i++){
-            Container importContainer = new Container(Container.getFreeContainerCode());
+            importContainer = new Container(Container.getFreeContainerCode());
             parking.park(0, (Container) importContainer);                
         }
     }              
@@ -58,6 +63,26 @@ import java.util.*;//ser mais preciso
      */public void setName(String name){    
         if(name != null)
             this.name = name;
+    }
+    
+    /**
+     * Permite saber a latitude da estação de abastecimento e retorna um número real.
+     * 
+     * @return   A latitude da estação de abastecimento.
+     * 
+     */
+    public double getLatitude(){          
+        return position.getLatitude();
+    }
+
+    /**
+     * Permite saber a longitude da estação de abastecimento e retorna um número real.
+     * 
+     * @return   A longitude da estação de abastecimento.
+     * 
+     */
+    public double getLongitude(){        
+        return position.getLongitude();
     }
 
     /**
