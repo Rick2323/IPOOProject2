@@ -14,7 +14,7 @@ public class ProductManagement
      */
     public ProductManagement(){}
 
-    private boolean codeIsValid(Integer code){
+    private static boolean codeIsValid(Integer code){
         if(code >= 0 && code != null)
             return true;
         else
@@ -43,7 +43,7 @@ public class ProductManagement
         return null;
     }
 
-    public boolean productIsRegisted(Integer code){
+    public static boolean productIsRegisted(Integer code){
         if(codeIsValid(code) && registedProducts.containsKey(code))
             return true;
         else

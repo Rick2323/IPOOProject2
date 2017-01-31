@@ -331,6 +331,21 @@ public class Container
             System.out.println("Código Inválido!");        
     }
 
+    public static int getFreeContainerCode(){
+        ArrayList<Container> arrayCopy = new ArrayList<Container>(registedContainers);
+        ArrayList<Integer> integersFromCopy = new ArrayList<Integer>();
+
+        for(Container container: arrayCopy)
+            integersFromCopy.add(container.getCode());
+
+        Integer i = 1;
+
+        while(integersFromCopy.contains(i))
+            i++;
+
+        return i;
+    }
+
     private String containerString(){
         String exportString = "***** Lista de Contentores Registados *****\n";
 
