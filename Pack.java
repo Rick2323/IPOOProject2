@@ -1,7 +1,5 @@
 /**
  * Pack representa um conjunto de unidades de um produto;
- * Este produto é designado por código, peso (por unidade) e volume (por unidade) fixo;
- * E por um nome e quantidade (de unidades) variavél. 
  *
  * @author 160221052  Ricardo Carmo.
  * @author 160221072  Miguel Lobato.
@@ -29,7 +27,7 @@ public class Pack
 
     public Pack(Integer code, String name, double weight, double volume, int quantity){
         registerProduct(code, name, weight, volume);
-        if(code != null && code >= 0 && productManagement.productIsRegisted(code))
+        if(codeIsValid(code) && productManagement.productIsRegisted(code))
             this.code = code;
         else{
             this.code = null;
@@ -41,24 +39,32 @@ public class Pack
         else
             this.quantity = 1;
     }
-    
+
     private boolean codeIsValid(Integer code){
         return (code != null && code >= 0);
     }
-    
+
     private boolean quantityIsValid(int quantity){
-        return quantity >= 0;
+        return quantity > 0;
     }
-    
+
     /**
      * Permite obter o código do produto;
      * 
      * @return    O código do produto.
      */
-    public int getCode(){
+    public Integer getCode(){
         return code;
     }
 
+    /**
+     * Regista o código do produto e a este fica associado um nome, peso e volume.
+     * 
+     * @param   code    Código do produto.
+     * @param   name    Nome do produto.
+     * @param   weight  Peso Unitário.
+     * @param   volume  Volume Unitário.
+     */ 
     public static void registerProduct(Integer code, String name, double weight, double volume){
         productManagement.registerProduct(code, name, weight, volume);
     }
@@ -67,10 +73,19 @@ public class Pack
         return code != null;
     }
 
+    /**
+     * Permite corrigir o código do pack, caso o atual seja inválido e o novo válido.
+     * 
+     * @param   code    Código do produto.
+     */
     public void correctInvadidCode(Integer code){
         if(code != null && code >= 0)
-            if(this.code == null)
-                this.code = code;
+            if(this.code == null){
+                if(productManagement.productIsRegisted(code))
+                    this.code = code;
+                else
+                    System.out.println("Código Introduzido Inválido!");
+            }
             else
                 System.out.println("O Código Atual Não É Inválido!");
         else
@@ -90,6 +105,11 @@ public class Pack
         return 0;
     }
 
+    /**
+     * Permite obter o nome do produto.
+     * 
+     * @return  O nome do produto.
+     */
     public String getName(){
         if(packHasValidCode())
             return productManagement.getProductInformation(code).split("/")[0]; 
@@ -98,6 +118,11 @@ public class Pack
         return null;
     }
 
+    /**
+     * Permite obter o peso unitário em Kg do produto.
+     * 
+     * @return  O peso unitário do produto.
+     */
     public double getWeight(){
         if(packHasValidCode())
             return Double.parseDouble(productManagement.getProductInformation(code).split("/")[1]);
@@ -106,6 +131,11 @@ public class Pack
         return 0.0;
     }
 
+    /**
+     * Permite obter o volume unitário em cm^3 do produto.
+     * 
+     * @return  O volume unitário do produto.
+     */
     public double getVolume(){
         if(packHasValidCode())
             return Double.parseDouble(productManagement.getProductInformation(code).split("/")[2]); 

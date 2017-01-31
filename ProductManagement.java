@@ -1,6 +1,7 @@
 import java.util.*; //ser mais preciso
 /**
- * Escreva a descrição da classe ProductManagement aqui.
+ * ProductManagement representa uma lista de todos os produtos registados para circulação, 
+ * sendo que a cada código (code) está associado um nomeString, peso unitário em Kg e volume unitário em Kg, ou seja (code - name/weight/volume).
  * 
  * @author 160221052  Ricardo Carmo.
  * @author 160221072  Miguel Lobato.
@@ -16,7 +17,7 @@ public class ProductManagement
     public ProductManagement(){}
 
     private static boolean codeIsValid(Integer code){
-        if(code >= 0 && code != null)
+        if(code != null && code >= 0)
             return true;
         else
             return false;

@@ -11,11 +11,12 @@ import org.junit.Test;
  * @author 160221072  Miguel Lobato.
  * @version 31/1/2017
  */
-public class ProductManagementTest
+public class productManagementTest
 {
-    public ProductManagementTest()
+    public productManagementTest()
     {
     }
+    
     ProductManagement productManagement= new ProductManagement();
     
     @Before

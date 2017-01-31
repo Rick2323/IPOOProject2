@@ -14,7 +14,6 @@ public class LorryManagement
      */
     public LorryManagement()
     {
-
     }
 
     public void registerLorry(Lorry lorry){
