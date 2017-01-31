@@ -39,6 +39,8 @@ public class AutomatedDistribution
             int containerCode = lorry.getContainer().getCode();
             shop.unloadLorry(lorry);
             shop.unloadContainerSingle(containerCode, productCode, productQuantity);
+            shop.loadLorryWithContainer(lorry, containerCode);
+            
             if(returnToSupplyStation)
                 lorry.moveLorry(supplyStation.getLatitude(), supplyStation.getLongitude());
         }

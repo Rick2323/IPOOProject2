@@ -71,8 +71,8 @@ public class Garage
      * @return    um objeto da classe camiao.
      * 
      */public Lorry unparkLorry(int parkingSlot){
-        if(parkingLot.getLorryFromSlot(parkingSlot) != null){
-            setParked(parkingLot.getLorryFromSlot(parkingSlot));            
+        if(parkingLot.getObjectFromSlot(parkingSlot) != null){
+            setParked((Lorry) parkingLot.getObjectFromSlot(parkingSlot));            
             return (Lorry) parkingLot.unpark(parkingSlot);
         }
         return null;
@@ -84,8 +84,8 @@ public class Garage
      * @param   parkingSlot   O lugar de estacionamento na garagem.
      * 
      */public void inspection(int parkingSlot){
-        if(parkingLot.getLorryFromSlot(parkingSlot) != null)
-            parkingLot.getLorryFromSlot(parkingSlot).inspection();
+        if(parkingLot.getObjectFromSlot(parkingSlot) != null)
+            ((Lorry)parkingLot.getObjectFromSlot(parkingSlot)).inspection();
     }
 
     /**

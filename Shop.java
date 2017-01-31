@@ -43,7 +43,7 @@ import java.util.*; //ser mais preciso
         if(name != null)
             this.name = name;
     }
-    
+
     /**
      * Permite saber a latitude da Loja e retorna um número real.
      * 
@@ -73,6 +73,7 @@ import java.util.*; //ser mais preciso
         if(lorry != null){
             if(parking.hasSpace()){
                 if(position.compareCoordinates(lorry))
+
                     parking.park(0, lorry.unloadContainer()); 
                 else
                     System.out.println("Coordenadas Inválidas");
@@ -81,7 +82,15 @@ import java.util.*; //ser mais preciso
                 System.out.println("Não há espaço disponível no parque!");
         }
         else
-            System.out.println("Camião Inválido!");          
+            System.out.println("Camião Inválido!");      
+    }
+
+    public void loadLorryWithContainer(Lorry lorry, int containerCode){
+        if(lorry != null && containerCode >= 0){
+            int index = parking.containerExists(containerCode);
+            if(index != -1)
+                lorry.loadContainer((Container) parking.getObjectFromSlot(index));        
+        }
     }
 
     /**
@@ -92,7 +101,7 @@ import java.util.*; //ser mais preciso
      */public void unloadContainerFully(int containerCode){
         ArrayList<Pack> packsToStorage = new ArrayList<Pack>();        
         packsToStorage.addAll(parking.unloadContainerFully(containerCode));
-        
+
         ArrayList<Pack> packsToRemove = new ArrayList<Pack>();
 
         if(packsToStorage != null && !packsToStorage.isEmpty())
@@ -101,7 +110,7 @@ import java.util.*; //ser mais preciso
                     storage.importPack(pack);
                     packsToRemove.add(pack);                    
                 }
-                
+
         packsToStorage.removeAll(packsToRemove);
 
         if(!packsToStorage.isEmpty())

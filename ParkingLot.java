@@ -117,10 +117,10 @@ public class ParkingLot
         return null;
     }
 
-    public Lorry getLorryFromSlot(Integer parkingSlot){
+    public Object getObjectFromSlot(Integer parkingSlot){
         if(parkingLot.containsKey(parkingSlot) && isValidParkingSlot(parkingSlot))
-            if(parkingLot.get(parkingSlot).getParked().getClass().getName().equals("Container"))
-                return (Lorry) parkingLot.get(parkingSlot).getParked();
+            if(parkingLot.get(parkingSlot).getParked().getClass().getName().equals("Lorry") || parkingLot.get(parkingSlot).getParked().getClass().getName().equals("Container")  )
+                return parkingLot.get(parkingSlot).getParked();
         return null;
     }
 
