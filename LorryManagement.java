@@ -1,9 +1,10 @@
 import java.util.*;//ser mais preciso
 /**
- * Escreva a descrição da classe LorryManagement aqui.
+ * Gere os camiões.
  * 
- * @author (seu nome) 
- * @version (número de versão ou data)
+ * @author 160221052  Ricardo Carmo.
+ * @author 160221072  Miguel Lobato.
+ * @version 31/1/2017
  */
 public class LorryManagement
 {

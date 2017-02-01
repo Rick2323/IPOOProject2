@@ -7,8 +7,9 @@ import org.junit.Test;
 /**
  * A classe de teste LorryManagementTest.
  *
- * @author  (seu nome)
- * @version (um número de versão ou data)
+ * @author 160221052  Ricardo Carmo.
+ * @author 160221072  Miguel Lobato.
+ * @version 31/1/2017
  */
 public class LorryManagementTest
 {

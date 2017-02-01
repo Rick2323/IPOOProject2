@@ -1,9 +1,12 @@
 import java.util.*; //ser mais preciso
 /**
- * Escreva a descrição da classe Parking aqui.
+ * Permite gerir o parqueamento dos camiões e dos contentores na classe Garage
  * 
- * @author (seu nome) 
- * @version (número de versão ou data)
+ * Permite gerir o parqueamento dos contentores na Classe SupplyStation e Shop.
+ * 
+ * @author 160221052  Ricardo Carmo.
+ * @author 160221072  Miguel Lobato.
+ * @version 31/1/2017
  */
 public class ParkingLot
 {
@@ -26,6 +29,12 @@ public class ParkingLot
         return (parkingSlot != null && parkingSlot > 0 && parkingSlot <= PARKING_SPACE);
     }
 
+    /**
+     * Estaciona um camião ou um contentor no lugar indicado ou se o lugar for o 0 estaciona num lugar livre..
+     * 
+     * @para object     Objeto do tipo Lorry(camião) ou Container(contentor).
+     * @para parkingSlot    lugar onde o objeto será estacionado.
+     */
     public void park(Integer parkingSlot, Object object){
         if(!hasError(parkingSlot, object))
             if(parkingSlot > 0 ){
@@ -59,6 +68,11 @@ public class ParkingLot
         return true;
     }
 
+    /**
+     * Verifica se há espaço livre no parque, usado para mensagens de erro.
+     * 
+     * @return Verdadeiro se houver espaço.
+     */
     public boolean hasSpace(){
         return parkingLot.size() < PARKING_SPACE;
     }
@@ -91,12 +105,23 @@ public class ParkingLot
         return -1;
     }
 
+    /**
+     * Devolve o primeiro objeto estacionado que encontrar.
+     * 
+     * @return O primeiro objeto estacionado que encontrar e null se não encontrar.
+     */
     public Object getParkedObject(){
         if(getOccupiedSpotNumber() != -1)
             return unpark(getOccupiedSpotNumber());
         return null;
     }
 
+    /**
+     * Remove e devolve o objeto que encontrar no lugar indicado.
+     * 
+     * @param parkingSlot   O lugar de onde se pretende retirar um objeto.
+     * @return o objeto que encontrar no lugar indicado.
+     */
     public Object unpark(Integer parkingSlot){
         if(!parkingLot.isEmpty())
             if(parkingSlot != null && parkingSlot >= 0 && parkingSlot <= PARKING_SPACE)
@@ -117,6 +142,12 @@ public class ParkingLot
         return null;
     }
 
+    /**
+     * Devolve o objeto que encontrar no lugar indicado.
+     * 
+     * @param parkingSlot   O lugar de onde se pretende retirar um objeto.
+     * @return o objeto que encontrar no lugar indicado.
+     */
     public Object getObjectFromSlot(Integer parkingSlot){
         if(parkingLot.containsKey(parkingSlot) && isValidParkingSlot(parkingSlot))
             if(parkingLot.get(parkingSlot).getParked().getClass().getName().equals("Lorry") || parkingLot.get(parkingSlot).getParked().getClass().getName().equals("Container")  )
@@ -125,13 +156,12 @@ public class ParkingLot
     }
 
     /**
-     * permite descarregar isoladamente cada pack de produto.
+     * Permite descarregar isoladamente cada pack que esteja no contentor de código indicado.
      * 
      * @param  containerCode   O codigo do contentor.
      * @param  packCode        O codigo do produto.
      * @param  quantity        A quantidade do produto.
      * @return     O produto escolhido para descarregar.
-     * 
      */
     public Pack unloadContainerSingle(int containerCode,int packCode,int quantity){ ////descarrega um pack, que tenha o codigo e quantidade introduzida, do contentor   
         Pack pack = null;
@@ -155,14 +185,12 @@ public class ParkingLot
     }
 
     /**
-     * Descarrega completamente os produtos do contentor e devolve um array de produtos.
+     * Descarrega completamente os packs do contentor e devolve um ArrayList com estes.
      * 
-     * @param  containerCode    O codigo do contentor.
-     * @return     Um array de ojbetos da classe pack. 
-     *
-     * 
+     * @param  containerCode    O código do contentor.
+     * @return     ArrayList com os packs que estavam previamente no contentor.
      */
-    public ArrayList<Pack> unloadContainerFully(int containerCode){ //descarrega todos os packs de um contentor, devolve um array
+    public ArrayList<Pack> unloadContainerFully(int containerCode){ //descarrega todos os packs de um contentor, devolve um ArrayList
         ArrayList<Pack> packsInContainer = null;
         boolean found = false;
         if(containerCode >= 0){
@@ -183,6 +211,12 @@ public class ParkingLot
         return packsInContainer;
     }
 
+    /**
+     * Carrega um contentor, indicado pelo seu código, com um pack indicado.
+     * 
+     * @param   containerCode   O código do contentor.
+     * @param   pack    O pack a carregar.
+     */
     public void loadContainer(int containerCode, Pack pack){
         if(pack != null)
             for(ParkingSpot slot: parkingLot.values())
@@ -190,14 +224,14 @@ public class ParkingLot
                     if(((Container) slot.getParked()).getCode() == containerCode)
                         ((Container) slot.getParked()).loadContainer(pack);
     }        
-    
-        /**
-         * Permite saber se determinado contentor existe no parque e devolve um numero inteiro.
-         * 
-         * @param  containerCode   O codigo do contentor.
-         * 
-         */
-        public int containerExists(int containerCode){  //se ve um contentor(codigo) ja existe no parque, se sim dá a sua posisão, usado na garagem
+
+    /**
+     * Permite saber se determinado contentor existe no parque, usando o seu código. Se existir devolve o seu lugar senão devolve -1.
+     * 
+     * @param  containerCode   O codigo do contentor.
+     * @return  O lugar do contentor se este existir no parque ou -1 se não existir.
+     */
+    public int containerExists(int containerCode){  //se ve um contentor(codigo) ja existe no parque, se sim dá a sua posisão, usado na garagem
         for(Map.Entry<Integer, ParkingSpot> entry:parkingLot.entrySet())
             if(((Container)entry.getValue().getParked()).getCode()==containerCode)
                 return(int)entry.getKey();        
@@ -206,9 +240,7 @@ public class ParkingLot
     }
 
     /**
-     * Produz uma String com informação sobre os parque.
-     *    
-     * 
+     * Produz uma String com informação sobre o parque.
      */
     public String toString(){
         String exportString = "";
@@ -229,8 +261,8 @@ public class ParkingLot
 
     /**
      * Mostra no ecrã a informação sobre os camiões e contentores estacionados no parque.
-     * 
-     */public void show(){
+     */
+    public void show(){
         System.out.print(toString());
     }
 

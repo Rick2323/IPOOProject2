@@ -1,9 +1,11 @@
 
 /**
- * Escreva a descrição da classe AutomatedDistribution aqui.
+ * Representa uma distribuição automática, ou seja, trata de transportar um produto entre uma
+ * estação de distribuição e uma loja, através de um camião.
  * 
- * @author (seu nome) 
- * @version (número de versão ou data)
+ * @author 160221052  Ricardo Carmo.
+ * @author 160221072  Miguel Lobato.
+ * @version 31/1/2017
  */
 public class AutomatedDistribution
 {

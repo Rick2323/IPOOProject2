@@ -1,9 +1,10 @@
 import java.util.*;//ser mais preciso
 /**
- * Escreva a descrição da classe SalesList aqui.
+ * Representa a lista de produtos que uma loja pode vender.
  * 
- * @author (seu nome) 
- * @version (número de versão ou data)
+ * @author 160221052  Ricardo Carmo.
+ * @author 160221072  Miguel Lobato.
+ * @version 31/1/2017)
  */
 public class SalesList
 {

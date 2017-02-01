@@ -32,8 +32,8 @@
      * 
      * @param   latitude    Implementa a latitude de um objecto atraves de um número real.
      * @param   longitude   Implementa a longitude de um objecto atraves de um numero real.
-     * 
-     */public void setCoordinates(double latitude,double longitude){
+     */
+    public void setCoordinates(double latitude,double longitude){
         if(coordinatesAreCorrect(latitude, longitude)){
             this.latitude = latitude;
             this.longitude = longitude;
@@ -46,8 +46,8 @@
      * Permite obter a latitude
      * 
      * @return   A latitude de um objecto.
-     * 
-     */public double getLatitude(){
+     */
+    public double getLatitude(){
         return latitude;
     }
 
@@ -55,8 +55,8 @@
      * Permite obter a longitude
      * 
      * @return   A longitude de um objecto.
-     * 
-     */public double getLongitude(){
+     */
+    public double getLongitude(){
         return longitude;
     }
 
@@ -75,7 +75,6 @@
      * @param  newLongitude  A nova longitude de um objecto dado por um número real.
      * 
      * @return   Um número real  da distancia percorrida.
-     * 
      */
     public double distanceTravelled(double newLatitude, double newLongitude){ 
         if(coordinatesAreCorrect(latitude, longitude))
@@ -88,7 +87,6 @@
      * 
      * @param  newLatitude   A nova latitude dada por um número real.
      * @param  newLongitude  A nova longitude dada por um número real.
-     * 
      */
     public void moveTo(double newLatitude, double newLongitude){
         if(coordinatesAreCorrect(newLatitude, newLongitude)){            
@@ -102,23 +100,12 @@
     /**
      * Permite comparar coordenada
      * 
-     * @return   devolve true caso sejam iguais e false se não forem
-     * 
+     * @return   devolve true caso sejam iguais e false se não forem.
      */
     public boolean compareCoordinates(Lorry lorry){
         if((Math.abs(latitude - lorry.getLatitude()) < 0.001) && (Math.abs(longitude - lorry.getLongitude()) < 0.001))
             return true;
         return false;
-
-        /*String lorryLatitude = "" + lorry.getLatitude();
-        String lorryLongitude = "" + lorry.getLongitude();
-        String shopLatitude = "" + latitude;
-        String shopLongitude = "" + longitude;
-
-        if(shopLatitude.equals(lorryLatitude))
-        if(shopLongitude.equals(lorryLongitude))
-        return true;
-        return false;*/
     }
 
     private String toStringDecimal(){//dá-nos a longitude e latitude em decimal.
@@ -158,15 +145,15 @@
      * Produz um texto com as coordenadas em decimal e em GMS
      * 
      * @return    Um texto com as coordenadas em decimal e GMS.
-     * 
-     */public String toString(){        
+     */
+    public String toString(){        
         return "Coordenadas Decimais: " + toStringDecimal() + "\n" + "Coordenadas GMS: " + toStringGMS();        
     }
 
     /**
      * Mostra no ecrã as coordenadas do objecto.
-     * 
-     */public void show(){
+     */
+    public void show(){
         System.out.println(toString());
     }
 }

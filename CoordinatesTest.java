@@ -8,7 +8,7 @@ import org.junit.Test;
 /**
  * The test class CoordinatesTest.
  *
- * @@author 160221052  Ricardo Carmo.
+ * @author 160221052  Ricardo Carmo.
  * @author 160221072  Miguel Lobato.
  * @version 31/1/2017
  */
@@ -21,24 +21,47 @@ public class CoordinatesTest
     {
     }
 
-    /**
-     * Sets up the test fixture.
-     *
-     * Called before every test case method.
-     */
     @Before
     public void setUp()
     {
     }
 
-    /**
-     * Tears down the test fixture.
-     *
-     * Called after every test case method.
-     */
     @After
     public void tearDown()
     {
+    }
+    
+    @Test
+    public void testSetCoordinates()
+    {
+        Coordinates coordina1 = new Coordinates (90.0, 180.0);
+        assertEquals(90.0, coordina1.getLatitude(), 0.0001);
+        assertEquals(180.0, coordina1.getLongitude(), 0.0001);
+        
+        //setCoordinates(lat, lon);
+        coordina1.setCoordinates(0.0, 0.0);
+        assertEquals(0.0, coordina1.getLatitude(), 0.0001);
+        assertEquals(0.0, coordina1.getLongitude(), 0.0001);
+        
+        
+        coordina1.setCoordinates(-90.0, -180.0);
+        assertEquals(-90.0, coordina1.getLatitude(), 0.0001);
+        assertEquals(-180.0, coordina1.getLongitude(), 0.0001);
+        
+        
+        coordina1.setCoordinates(90.0, 180.0);
+        assertEquals(90.0, coordina1.getLatitude(), 0.0001);
+        assertEquals(180.0, coordina1.getLongitude(), 0.0001);
+        
+        
+        coordina1.setCoordinates(-100.0, -200.0);
+        assertEquals(90.0, coordina1.getLatitude(), 0.0001);
+        assertEquals(180.0, coordina1.getLongitude(), 0.0001);
+        
+        
+        coordina1.setCoordinates(100.0, 200.0);
+        assertEquals(90.0, coordina1.getLatitude(), 0.0001);
+        assertEquals(180.0, coordina1.getLongitude(), 0.0001);
     }
 
     @Test
@@ -80,39 +103,6 @@ public class CoordinatesTest
     }
     
     @Test
-    public void testSetCoordinates()
-    {
-        Coordinates coordina1 = new Coordinates (90.0, 180.0);
-        assertEquals(90.0, coordina1.getLatitude(), 0.0001);
-        assertEquals(180.0, coordina1.getLongitude(), 0.0001);
-        
-        //setCoordinates(lat, lon);
-        coordina1.setCoordinates(0.0, 0.0);
-        assertEquals(0.0, coordina1.getLatitude(), 0.0001);
-        assertEquals(0.0, coordina1.getLongitude(), 0.0001);
-        
-        
-        coordina1.setCoordinates(-90.0, -180.0);
-        assertEquals(-90.0, coordina1.getLatitude(), 0.0001);
-        assertEquals(-180.0, coordina1.getLongitude(), 0.0001);
-        
-        
-        coordina1.setCoordinates(90.0, 180.0);
-        assertEquals(90.0, coordina1.getLatitude(), 0.0001);
-        assertEquals(180.0, coordina1.getLongitude(), 0.0001);
-        
-        
-        coordina1.setCoordinates(-100.0, -200.0);
-        assertEquals(90.0, coordina1.getLatitude(), 0.0001);
-        assertEquals(180.0, coordina1.getLongitude(), 0.0001);
-        
-        
-        coordina1.setCoordinates(100.0, 200.0);
-        assertEquals(90.0, coordina1.getLatitude(), 0.0001);
-        assertEquals(180.0, coordina1.getLongitude(), 0.0001);
-    }
-    
-    @Test
     public void testDistanceTravelled()
     {
         Coordinates pos1 = new Coordinates(0.0, 0.0);
@@ -129,6 +119,7 @@ public class CoordinatesTest
         
         
     }
+    
     @Test
     public void testMoveTo(){
     
@@ -154,6 +145,7 @@ public class CoordinatesTest
           assertEquals(-1.0, pos2.getLongitude(),0.0001);
     
     }
+    
     @Test
     public void testCompareCoordinates()
     {
@@ -165,6 +157,5 @@ public class CoordinatesTest
             
         assertEquals(true, pos1.compareCoordinates(lorry));
         assertEquals(false, pos2.compareCoordinates(lorry));
-    }/*Lorry(String designation, int code, double latitude, double longitude)*/
+    }
 }
-
