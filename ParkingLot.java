@@ -1,15 +1,12 @@
 import java.util.*; //ser mais preciso
 /**
- * Permite gerir o parqueamento dos camiões e dos contentores na classe Garage
- * 
- * Permite gerir o parqueamento dos contentores na Classe SupplyStation e Shop.
+ * Gere o parqueamento dos camiões e dos contentores na classe Garage e somente dos contentores na classe SupplyStation e Shop.
  * 
  * @author 160221052  Ricardo Carmo.
  * @author 160221072  Miguel Lobato.
- * @version 31/1/2017
+ * @version 1/2/2017
  */
-public class ParkingLot
-{
+public class ParkingLot{
     private HashMap<Integer, ParkingSpot> parkingLot;
     private final int PARKING_SPACE;
     /**
@@ -41,7 +38,6 @@ public class ParkingLot
                 ParkingSpot spot = new ParkingSpot(object);
                 parkingLot.put(parkingSlot,spot);
             }
-
             else if (parkingSlot == 0){
                 ParkingSpot spot = new ParkingSpot(object);
                 parkingLot.put(getFreeSpotNumber(),spot);
@@ -163,7 +159,7 @@ public class ParkingLot
      * @param  quantity        A quantidade do produto.
      * @return     O produto escolhido para descarregar.
      */
-    public Pack unloadContainerSingle(int containerCode,int packCode,int quantity){ ////descarrega um pack, que tenha o codigo e quantidade introduzida, do contentor   
+    public Pack unloadContainerSingle(int containerCode, int packCode, int quantity){ ////descarrega um pack, que tenha o codigo e quantidade introduzida, do contentor   
         Pack pack = null;
         boolean found = false;
         if(containerCode >= 0){
@@ -265,5 +261,4 @@ public class ParkingLot
     public void show(){
         System.out.print(toString());
     }
-
 }

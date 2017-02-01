@@ -1,12 +1,12 @@
 /**
- * Gere as coodenadas dos objetos das classes Lorry, Garage, Shop e SupplyStation
+ * Gere as coordenadas de um objeto.
  * 
  * @author 160221052  Ricardo Carmo.
  * @author 160221072  Miguel Lobato.
  * @version 31/1/2017
  * 
- */public class Coordinates
-{
+ */
+public class Coordinates{
     private double latitude;
     private double longitude;
 

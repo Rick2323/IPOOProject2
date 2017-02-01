@@ -1,7 +1,6 @@
 import java.util.*;//ser mais preciso
 /**
- * Container implementa um contentor a que será dado um número de codigo.
- * Cada contentor tem uma capacidade de 22000Kg , 33000000cm^3 e espaço para 10 Packs.
+ * Representa um contentor sendo este definido por um código. Todos os contentores tem uma capacidade de 22000Kg, 33000000cm3 e espaço para 10 Packs.
  * 
  * Cada contentor estará vazio no acto de criação.
  * 
@@ -14,7 +13,7 @@ import java.util.*;//ser mais preciso
 
 public class Container
 {
-    private static HashSet<Container> registedContainers = new HashSet<Container>();
+    private static HashSet<Container> registedContainers = new HashSet<>();
 
     private Integer code;
     private ArrayList<Pack> listOfPacks;
@@ -239,7 +238,7 @@ public class Container
      * Permite obter o número de produtos no contentor. Retorna-o como um número inteiro.
      * 
      * @return   O número de produtos.
-     */public int getNumberOfPacks(){ //ver se faz alguma coisa
+     */public int getNumberOfPacks(){ //testes
         return listOfPacks.size();
     }
 

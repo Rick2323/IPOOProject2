@@ -11,9 +11,9 @@ import org.junit.Test;
  * @author 160221072  Miguel Lobato.
  * @version 31/1/2017
  */
-public class productManagementTest
+public class ProductManagementTest
 {
-    public productManagementTest()
+    public ProductManagementTest()
     {
     }
     
@@ -21,7 +21,8 @@ public class productManagementTest
     
     @Before
     public void setUp()
-    {        
+    {                
+        productManagement.clearRegistedProducts();
         productManagement.registerProduct(1, "A", 1.0, 1.0);        
         productManagement.registerProduct(-1, "A", 1.0, 1.0);        
         productManagement.registerProduct(2, null, 1.0, 1.0);        

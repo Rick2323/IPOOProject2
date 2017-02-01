@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=
+comment0.target=AutomatedDistributionTest()
+comment0.text=\r\n\ Construtor\ default\ para\ a\ classe\ de\ teste\ AutomatedDistributionTest\r\n
+comment1.params=
+comment1.target=void\ setUp()
+comment2.params=
+comment2.target=void\ tearDown()
+comment3.params=
+comment3.target=void\ testDistribute()
+numComments=4

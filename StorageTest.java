@@ -58,14 +58,14 @@ public class StorageTest
         assertEquals(1, storage.getNumberOfStoredPacks());
         
         Pack pack2 = storage.exportPack(pack1.getCode(), 5);        
-        assertEquals((long)1, (long)pack2.getCode());
-        assertEquals((long)5, (long)pack2.getQuantity());
+        assertEquals(1, pack2.getCode(), 0.0001);
+        assertEquals(5, pack2.getQuantity(), 0.0001);
         
         assertEquals(1, storage.getNumberOfStoredPacks());
         
         Pack pack3 = storage.exportPack(pack1.getCode(), 10);        
-        assertEquals((long)1, (long)pack3.getCode());
-        assertEquals((long)10, (long)pack3.getQuantity());
+        assertEquals(1, pack3.getCode(), 0.0001);
+        assertEquals(10, pack3.getQuantity(), 0.0001);
         
         assertEquals(0, storage.getNumberOfStoredPacks());
     }

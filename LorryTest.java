@@ -134,14 +134,14 @@ public class LorryTest
         Lorry lorry1 = new Lorry("A", 1, 0.0, 0.0);
 
         assertEquals(0, lorry1.getNumberOfInspections());
-        assertEquals((long)0, (long)lorry1.getKilometersSinceLastInspection());
+        assertEquals(0, lorry1.getKilometersSinceLastInspection(), 0.0001);
 
         lorry1.moveLorry(0, 1);    
-        assertEquals((long)111.12, (long)lorry1.getKilometersSinceLastInspection());
+        assertEquals(111.12, lorry1.getKilometersSinceLastInspection(), 0.0001);
 
         lorry1.inspection();
         assertEquals(1, lorry1.getNumberOfInspections());
-        assertEquals((long)0, (long)lorry1.getKilometersSinceLastInspection());
+        assertEquals(0, lorry1.getKilometersSinceLastInspection(), 0.0001);
     }
 
     @Test
@@ -159,62 +159,62 @@ public class LorryTest
         Lorry lorry1 = new Lorry("A", 1, 0.0, 0.0);
 
         assertEquals(0, lorry1.getNumberOfInspections());
-        assertEquals((long)0, (long)lorry1.getKilometersSinceLastInspection());
+        assertEquals(0, lorry1.getKilometersSinceLastInspection(), 0.0001);
 
         lorry1.moveLorry(0, 1);    
-        assertEquals((long)111.12, (long)lorry1.getKilometersSinceLastInspection());
+        assertEquals(111.12, lorry1.getKilometersSinceLastInspection(), 0.0001);
 
         lorry1.inspection();
-        assertEquals((long)0, (long)lorry1.getKilometersSinceLastInspection());
+        assertEquals(0, lorry1.getKilometersSinceLastInspection(), 0.0001);
     }
 
     @Test
     public void testMoveLorry(){        
         Lorry lorry1 = new Lorry("A", 1, 0.0, 0.0);
 
-        assertEquals((long)0, (long)lorry1.getLatitude());
-        assertEquals((long)0, (long)lorry1.getLongitude());
-        assertEquals((long)0, (long)lorry1.getKilometersSinceLastInspection());
+        assertEquals(0, lorry1.getLatitude(), 0.0001);
+        assertEquals(0, lorry1.getLongitude(), 0.0001);
+        assertEquals(0, lorry1.getKilometersSinceLastInspection(), 0.0001);
 
         lorry1.moveLorry(0, 1);
-        assertEquals((long)0, (long)lorry1.getLatitude());
-        assertEquals((long)1, (long)lorry1.getLongitude());
-        assertEquals((long)111.12, (long)lorry1.getKilometersSinceLastInspection());
+        assertEquals(0, lorry1.getLatitude(), 0.0001);
+        assertEquals(1, lorry1.getLongitude(), 0.0001);
+        assertEquals(111.12, lorry1.getKilometersSinceLastInspection(), 0.0001);
 
         lorry1.moveLorry(1, 1);
-        assertEquals((long)1, (long)lorry1.getLatitude());
-        assertEquals((long)1, (long)lorry1.getLongitude());
-        assertEquals((long)222.24, (long)lorry1.getKilometersSinceLastInspection());
+        assertEquals(1, lorry1.getLatitude(), 0.0001);
+        assertEquals(1, lorry1.getLongitude(), 0.0001);
+        assertEquals(222.24, lorry1.getKilometersSinceLastInspection(), 0.0001);
     }
 
     @Test
     public void testGetLatitude(){
         Lorry lorry1 = new Lorry("A", 1, 0.0, 0.0);        
-        assertEquals((long)0, (long)lorry1.getLatitude());
+        assertEquals(0, lorry1.getLatitude(), 0.0001);
 
         lorry1.moveLorry(5, 0);
-        assertEquals((long)5, (long)lorry1.getLatitude());
+        assertEquals(5, lorry1.getLatitude(), 0.0001);
 
         lorry1.moveLorry(30, 0);
-        assertEquals((long)30, (long)lorry1.getLatitude());
+        assertEquals(30, lorry1.getLatitude(), 0.0001);
 
         lorry1.moveLorry(-1000, 0);
-        assertEquals((long)30, (long)lorry1.getLatitude());
+        assertEquals(30, lorry1.getLatitude(), 0.0001);
     }
     
     @Test
     public void testGetLongitude(){
         Lorry lorry1 = new Lorry("A", 1, 0.0, 0.0);        
-        assertEquals((long)0, (long)lorry1.getLongitude());
+        assertEquals(0, lorry1.getLongitude(), 0.0001);
 
         lorry1.moveLorry(0, 5);
-        assertEquals((long)5, (long)lorry1.getLongitude());
+        assertEquals(5, lorry1.getLongitude(), 0.0001);
 
         lorry1.moveLorry(0, 30);
-        assertEquals((long)30, (long)lorry1.getLongitude());
+        assertEquals(30, lorry1.getLongitude(), 0.0001);
 
         lorry1.moveLorry(0, 1000);
-        assertEquals((long)30, (long)lorry1.getLongitude());
+        assertEquals(30, lorry1.getLongitude(), 0.0001);
     }
     
     @Test
@@ -246,17 +246,17 @@ public class LorryTest
     public void testGetTotalKilometers(){
         Lorry lorry1 = new Lorry("A", 1, 0.0, 0.0);
 
-        assertEquals((long)0, (long)lorry1.getTotalKilometers());
+        assertEquals(0, lorry1.getTotalKilometers(), 0.0001);
 
         lorry1.moveLorry(0, 1);
-        assertEquals((long)111.12, (long)lorry1.getTotalKilometers());
+        assertEquals(111.12, lorry1.getTotalKilometers(), 0.0001);
 
         lorry1.inspection();
         
-        assertEquals((long)111.12, (long)lorry1.getTotalKilometers());
+        assertEquals(111.12, lorry1.getTotalKilometers(), 0.0001);
         
         lorry1.moveLorry(1, 1);
-        assertEquals((long)222.24, (long)lorry1.getTotalKilometers());
+        assertEquals(222.24, lorry1.getTotalKilometers(), 0.0001);
     }
     
     @Test

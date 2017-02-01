@@ -1,17 +1,11 @@
 /**
- * Implementa as garagens
- * 
- * Esta classe utiliza um objecto da classe Coordinates para dar uma posição às garagens.
- * 
- * Esta classe utiliza um objecto da classe Parking para criar e gerir o parqueamento.
+ * Representa um parque de estacionamento na qual se pode estacionar camiões(Lorry) e contentores(Container).
  * 
  * @author 160221052  Ricardo Carmo.
  * @author 160221072  Miguel Lobato.
  * @version 31/1/2017
- * 
  */
-public class Garage
-{
+public class Garage{
     private String name;
     private Coordinates position;
     private ParkingLot parkingLot;
@@ -31,10 +25,19 @@ public class Garage
      * Permite modificar o nome da garagem
      * 
      * @param  name   O nome da garagem
-     * 
-     */public void setName(String name){    
+     */
+    public void setName(String name){    
         if(name != null)
             this.name = name;
+    }
+
+    /**
+     * Devolve o nome da garagem.
+     * 
+     * @return nome da garagem.
+     */
+    public String getName(){
+        return name;
     }
 
     private boolean lorryHasContainer(Lorry lorry){//permite verificar se o camião tem contentor.
@@ -44,15 +47,26 @@ public class Garage
     private void setParked(Lorry lorry){//permite parquear um camião na garagem.
         lorry.setParked();
     }
+    
+    /**
+     * Devolve o objeto que encontrar no lugar indicado, usado para testes.
+     * 
+     * @param parkingSlot   O lugar de onde se pretende retirar um objeto.
+     * @return o objeto que encontrar no lugar indicado.
+     */
+    public Object getObjectFromSlot(Integer parkingSlot){
+        return parkingLot.getObjectFromSlot(parkingSlot);
+    }
 
     /**
-     * Permite estacionar um camiao num determinado lugar.
+     * Permite estacionar um camiao num determinado lugar,
+     * se o lugar for 0, estaciona num lugar livre.
      * 
      * 
      * @param lorry    O camião a estacionar na garagem.
      * @param parkingSlot    O lugar de estacionamento.
-     * 
-     */public void parkLorry(Lorry lorry, int parkingSlot){
+     */
+    public void parkLorry(Lorry lorry, int parkingSlot){
         if(lorry != null)
             if(position.compareCoordinates(lorry)){
                 parkingLot.park(parkingSlot, lorry);
@@ -68,9 +82,9 @@ public class Garage
      * Permite retirar um camião de um determinado lugar de estacionamento.
      * 
      * @param  parkingSlot    O lugar de estacionamento.
-     * @return    um objeto da classe camiao.
-     * 
-     */public Lorry unparkLorry(int parkingSlot){
+     * @return    o camião que estava estacionado.
+     */
+    public Lorry unparkLorry(int parkingSlot){
         if(parkingLot.getObjectFromSlot(parkingSlot) != null){
             setParked((Lorry) parkingLot.getObjectFromSlot(parkingSlot));            
             return (Lorry) parkingLot.unpark(parkingSlot);
@@ -79,11 +93,11 @@ public class Garage
     }        
 
     /**
-     * Permite fazer a inspecao de um camiao um dado lugar de estacionamento.
+     * Permite fazer a inspecão de um camiao um dado lugar de estacionamento.
      * 
      * @param   parkingSlot   O lugar de estacionamento na garagem.
-     * 
-     */public void inspection(int parkingSlot){
+     */
+    public void inspection(int parkingSlot){
         if(parkingLot.getObjectFromSlot(parkingSlot) != null)
             ((Lorry)parkingLot.getObjectFromSlot(parkingSlot)).inspection();
     }
@@ -93,8 +107,8 @@ public class Garage
      * 
      * @param   lorry    O camião na garagem.
      * @param   containerCode    O codigo do camião.
-     * 
-     */public void SwitchOrLoadContainerToLorry(Lorry lorry, int containerCode){
+     */
+    public void switchOrLoadContainerToLorry(Lorry lorry, int containerCode){
         int containerInParkIndex = parkingLot.containerExists(containerCode); //ve se existe o contentor do codigo que entra no parque e da a sua posisão
         if(lorry != null)
             if(containerCode >= 0)
@@ -125,8 +139,8 @@ public class Garage
      * Permite descarregar o contentor de um camião para um lugar de estacionamento.
      * 
      * @param  lorry   O cammião a descarregar.
-     * 
-     */public void unloadLorry(Lorry lorry){ 
+     */
+    public void unloadLorry(Lorry lorry){ 
         if(lorry != null)
             if(position.compareCoordinates(lorry)) //compara coordenadas
                 if(lorryHasContainer(lorry)){   //camiao tem contentor                                      
@@ -141,12 +155,11 @@ public class Garage
     }
 
     /**
-     * Produz um texto com a informação sobre da denominação da garagem, a sua posição e o que se passa no seu parque de estacionamento.
+     * Produz um texto com a informação sobre da denominação da garagem, a sua posição e a imformação sobre seu parque de estacionamento.
      * 
      * @return  Informação sobre a garagem.
-     * 
-     */public String toString(){  
-
+     */
+    public String toString(){  
         return "****** Lista de Informação Sobre a Garagem ******\n" + "Designação: " + name + "\n"
         + position.toString() + "\n\n" + parkingLot.toString() + "\n\n";
     }
@@ -154,7 +167,8 @@ public class Garage
     /**
      * Mostra no ecrã toda a informação disponivel sobre a garagem.
      * 
-     */public void show(){
+     */
+    public void show(){
         System.out.println(toString());
     }
 }

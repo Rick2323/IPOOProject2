@@ -1,13 +1,12 @@
 import java.util.*;//ser mais preciso
 /**
- * Esta classe representa um armazem, na qual são armazenados packs
- * 
+ * Representa um armazém, na qual são armazenados packs.
  * 
  * @author 160221052  Ricardo Carmo.
  * @author 160221072  Miguel Lobato.
  * @version 31/1/2017
- */public class Storage
-{
+ */
+public class Storage{
     private ArrayList<Pack> packsInStorage;
 
     public Storage()

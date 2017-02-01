@@ -79,10 +79,10 @@ public class ContainerTest
         Pack pack2 = new Pack(2, "B", 2, 2, 10);
 
         container1.loadContainer(pack1);        
-        assertEquals((long)5, (long)container1.ocuppiedWeight());
+        assertEquals(5, container1.ocuppiedWeight(), 0.0001);
 
         container1.loadContainer(pack2); 
-        assertEquals((long)25, (long)container1.ocuppiedWeight());
+        assertEquals(25, container1.ocuppiedWeight(), 0.0001);
     }
 
     @Test
@@ -92,10 +92,10 @@ public class ContainerTest
         Pack pack2 = new Pack(2, "B", 1000, 2, 10);
 
         container1.loadContainer(pack1);        
-        assertEquals((long)20000, (long)container1.availableWeight());
+        assertEquals(20000, container1.availableWeight(), 0.0001);
 
         container1.loadContainer(pack2); 
-        assertEquals((long)10000, (long)container1.availableWeight());
+        assertEquals(10000, container1.availableWeight(), 0.0001);
     }
 
     @Test
@@ -105,10 +105,10 @@ public class ContainerTest
         Pack pack2 = new Pack(2, "B", 2, 2, 10);
 
         container1.loadContainer(pack1);        
-        assertEquals((long)5, (long)container1.ocuppiedVolume());
+        assertEquals(5, container1.ocuppiedVolume(), 0.0001);
 
         container1.loadContainer(pack2); 
-        assertEquals((long)25, (long)container1.ocuppiedVolume());
+        assertEquals(25, container1.ocuppiedVolume(), 0.0001);
     }
 
     @Test
@@ -118,10 +118,10 @@ public class ContainerTest
         Pack pack2 = new Pack(2, "B", 2, 20000, 1000);
 
         container1.loadContainer(pack1);        
-        assertEquals((long)30000000, (long)container1.availableVolume());
+        assertEquals(30000000, container1.availableVolume(), 0.0001);
 
         container1.loadContainer(pack2); 
-        assertEquals((long)10000000, (long)container1.availableVolume());
+        assertEquals(10000000, container1.availableVolume(), 0.0001);
     }
 
     @Test
@@ -147,13 +147,13 @@ public class ContainerTest
         container1.loadContainer(pack2); 
 
         Pack fromContainer1 = container1.unloadContainer(pack1.getCode(), pack1.getQuantity());    
-        assertEquals((long)1, (long)fromContainer1.getCode()); 
-        assertEquals((long)1, (long)fromContainer1.getQuantity());  
+        assertEquals(1, fromContainer1.getCode(), 0.0001); 
+        assertEquals(1, fromContainer1.getQuantity(), 0.0001);  
         assertEquals(1, container1.getNumberOfPacks());
 
         Pack fromContainer2 = container1.unloadContainer(pack2.getCode(), pack2.getQuantity());    
-        assertEquals((long)2, (long)fromContainer2.getCode()); 
-        assertEquals((long)2, (long)fromContainer2.getQuantity());  
+        assertEquals(2, fromContainer2.getCode(), 0.0001); 
+        assertEquals(2, fromContainer2.getQuantity(), 0.0001);  
         assertEquals(0, container1.getNumberOfPacks());
     }
 

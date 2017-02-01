@@ -4,10 +4,9 @@ import java.util.*;//ser mais preciso
  * 
  * @author 160221052  Ricardo Carmo.
  * @author 160221072  Miguel Lobato.
- * @version 31/1/2017)
+ * @version 31/1/2017
  */
-public class SalesList
-{
+public class SalesList{
     private static ProductManagement productManagement = new ProductManagement();
     private HashSet<Integer> productsToSell;
 

@@ -67,6 +67,7 @@ public class LorryManagementTest
 
     @Test
     public void testGetNumberOfNewLorrys(){
+        lorryManagement.clearRegistedProducts();
         Lorry lorry1 = new Lorry("A", 1, 0, 0);
         Lorry lorry2 = new Lorry("A", 2, 0, 0);
 

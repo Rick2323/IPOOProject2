@@ -1,25 +1,20 @@
 import java.util.*; //ser mais preciso
 /**
- * Implementa uma loja dando-lhe um nome, armazem, coordenadas e parque de estacionamento.
- * 
- * Esta classe utiliza um objecto da classe Storage. 
- * Esta classe utiliza um objecto da classe Parking.
- * Esta classe utiliza um objeto da classe Coordinates,
- * 
- * Dá-nos um texto com toda a informação da loja.
+ * Representa uma loja, sendo que esta pode receber packs, que venham de contentores, guardar e vende-los posteriormente,
+ * se estes estiverem registados na lista de vendas.
  * 
  * @author 160221052  Ricardo Carmo.
  * @author 160221072  Miguel Lobato.
- * @version 31/1/2017
- * 
- */public class Shop
-{
+ * @version 1/2/2017
+ */
+public class Shop{
 
     private String name;
     private Storage storage;
     private ParkingLot parking;
     private Coordinates position;
     private SalesList salesList;
+    
     public Shop(String name, double latitude, double longitude)
     {
         if(name != null)
@@ -35,30 +30,37 @@ import java.util.*; //ser mais preciso
     }   
 
     /**
-     * Permite modificar o nome da loja
+     * Modificar o nome da loja
      * 
      * @param  name   O nome da loja.
-     * 
-     */public void setName(String name){    
+     */
+    public void setName(String name){    
         if(name != null)
             this.name = name;
     }
+    
+    /**
+     * Devolve o nome da loja.
+     * 
+     * @return nome da loja.
+     */
+    public String getName(){
+        return name;
+    }
 
     /**
-     * Permite saber a latitude da Loja e retorna um número real.
+     * Devolve a latitude da Loja.
      * 
      * @return   A latitude da Loja.
-     * 
      */
     public double getLatitude(){        
         return position.getLatitude();
     }
 
     /**
-     * Permite saber a longitude da Loja e retorna um número real.
+     * Dovolve a longitude da Loja e retorna um número real.
      * 
      * @return   A longitude da Loja.
-     * 
      */
     public double getLongitude(){       
         return position.getLongitude();
@@ -67,9 +69,9 @@ import java.util.*; //ser mais preciso
     /**
      * Permite descarregar o contentor de um camião para um lugar de estacionamento.
      * 
-     * @param   O camião a descarregar na loja.
-     * 
-     */ public void unloadLorry(Lorry lorry){
+     * @param   O camião a descarregar.
+     */
+    public void unloadLorry(Lorry lorry){
         if(lorry != null){
             if(parking.hasSpace()){
                 if(position.compareCoordinates(lorry))
@@ -85,6 +87,12 @@ import java.util.*; //ser mais preciso
             System.out.println("Camião Inválido!");      
     }
 
+    /**
+     * Permite carregar um dado camião con um contentor que esteja no parque.
+     * 
+     * @param lorry Camião a carregar.
+     * @param containerCode código do contentor que se que carregar.
+     */
     public void loadLorryWithContainer(Lorry lorry, int containerCode){
         if(lorry != null && containerCode >= 0){
             int index = parking.containerExists(containerCode);
@@ -94,15 +102,15 @@ import java.util.*; //ser mais preciso
     }
 
     /**
-     * Permite descarregar completamente o contentor no armazem da loja.
+     * Permite descarregar completamente um contentor que esteja no parque da loja.
      * 
-     * @param   containerCode    O codigo do contentor dado por um número inteiro.
-     * 
-     */public void unloadContainerFully(int containerCode){
-        ArrayList<Pack> packsToStorage = new ArrayList<Pack>();        
+     * @param   containerCode    O codigo do contentor a descarregar.
+     */
+    public void unloadContainerFully(int containerCode){
+        ArrayList<Pack> packsToStorage = new ArrayList<>();        
         packsToStorage.addAll(parking.unloadContainerFully(containerCode));
 
-        ArrayList<Pack> packsToRemove = new ArrayList<Pack>();
+        ArrayList<Pack> packsToRemove = new ArrayList<>();
 
         if(packsToStorage != null && !packsToStorage.isEmpty())
             for(Pack pack: packsToStorage)
@@ -115,17 +123,17 @@ import java.util.*; //ser mais preciso
 
         if(!packsToStorage.isEmpty())
             for(Pack pack: packsToStorage)
-                parking.loadContainer(containerCode, pack);
+                storage.importPack(pack);
     }
 
     /**
-     * Permite descarregar um pack do contentor para o armazem da loja.
+     * Permite descarregar um pack do contentor para o armazém da loja.
      * 
      * @param containerCode    O codigo do contentor dado por um número inteiro.
      * @param packCode         O codigo do produto dado por um número inteiro.
      * @param quantity         A quantidade de um produto dado por um número inteiro.
-     * 
-     */public void unloadContainerSingle(int containerCode,int packCode,int quantity){ 
+     */
+    public void unloadContainerSingle(int containerCode,int packCode,int quantity){ 
         Pack packToStorage = parking.unloadContainerSingle(containerCode, packCode, quantity);
 
         if(packToStorage != null)
@@ -139,33 +147,53 @@ import java.util.*; //ser mais preciso
      * @param  packCode    O codigo do produto dado por um número inteiro.
      * @param  quantity    A quantidade do produto por um número inteiro.
      * @return     O produto para vender.
-     * 
-     */public Pack sell(int packCode,int quantity){
+     */
+    public Pack sell(int packCode,int quantity){
         return storage.exportPack(packCode, quantity);        
     }
 
+    /**
+     * Adiciona um produto à lista de vendas, utilizando o seu código.
+     * 
+     * @param O código do produto a adicionar.
+     */
     public void addProductToSell(Integer code){
         salesList.addProductToSell(code);
     }
-
+    
+    /**
+     * Verifica se o código so produto existe na lista de vendas, e consequentemente
+     * se este pode ser vendido. (está nesta classe para ser usado em testes)
+     * 
+     * @param O código do produto que se quer verificar.
+     */
+    public boolean productCanBeSold(Integer code){
+        return salesList.productCanBeSold(code);
+    }
+    
+    /**
+     * Remove um produto da lista de vendas, utilizando o seu código.
+     * 
+     * @param O código do produto a remover.
+     */
     public void removeProductToSell(Integer code){
         salesList.removeProductToSell(code);
     }
 
     /**
-     * Produz uma lista de informação sobre a loja
+     * Produz uma String com uma lista de informação sobre a loja
      * 
      * @return  O texto com a lista de informação sobre a loja.
-     * 
-     */public String toString(){ 
+     */
+    public String toString(){ 
         return "****** Lista de Informação Sobre a Loja ******\n" + "Designação: " + name + "\n"
         + position.toString() + "\n\n" + parking.toString() + "\n\n" + storage.toString();
     }
 
     /**
      * Mostra no ecrã a lista de informação sobre a loja.
-     * 
-     */public void show(){
+     */
+    public void show(){
         System.out.println(toString());
     }
 }

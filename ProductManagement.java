@@ -1,14 +1,13 @@
 import java.util.*; //ser mais preciso
 /**
  * ProductManagement representa uma lista de todos os produtos registados para circulação, 
- * sendo que a cada código (code) está associado um nomeString, peso unitário em Kg e volume unitário em Kg, ou seja (code - name/weight/volume).
+ * sendo que a cada código (code) está associado um nome (String), peso unitário (double)em Kg e volume unitário (double)em Kg, ou seja (code - name/weight/volume).
  * 
  * @author 160221052  Ricardo Carmo.
  * @author 160221072  Miguel Lobato.
  * @version 31/1/2017
  */
-public class ProductManagement
-{    
+public class ProductManagement{    
     private static HashMap<Integer, String> registedProducts = new HashMap<Integer, String>();
 
     /**

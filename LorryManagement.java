@@ -1,13 +1,12 @@
 import java.util.*;//ser mais preciso
 /**
- * Gere os camiões.
+ * Representa uma lista com a informação de todos os camiões registados.
  * 
  * @author 160221052  Ricardo Carmo.
  * @author 160221072  Miguel Lobato.
  * @version 31/1/2017
  */
-public class LorryManagement
-{
+public class LorryManagement{
     private static HashSet<Lorry> registedLorrys = new HashSet<Lorry>();
 
     /**
@@ -31,7 +30,7 @@ public class LorryManagement
                 if(!lorryIsRegisted(lorry) && !lorryIsRegisted(lorry.getCode()))//vai ver se não há camioes repetidos
                     registedLorrys.add(lorry);
                 else
-                    System.out.println("O Contentor Já Se Encontra Registado!"); 
+                    System.out.println("O Camião Já Se Encontra Registado!"); 
             }
         else
             System.out.println("Contentor Inválido");

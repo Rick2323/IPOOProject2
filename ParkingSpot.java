@@ -1,4 +1,3 @@
-
 /**
  * Representa um lugar num parque de estacionamento, podendo este ter um camião ou um contentor.
  * 
@@ -6,8 +5,7 @@
  * @author 160221072  Miguel Lobato.
  * @version 31/1/2017
  */
-public class ParkingSpot
-{
+public class ParkingSpot{
     private Lorry lorry;
     private Container container;
 

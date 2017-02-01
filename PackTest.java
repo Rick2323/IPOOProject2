@@ -41,10 +41,10 @@ public class PackTest
 
         assertEquals(null, pack1.getCode());
         assertEquals(null, pack2.getCode());
-        assertEquals((long)10, (long)pack3.getCode());
-        assertEquals((long)1, (long)pack4.getQuantity());
-        assertEquals((long)1, (long)pack5.getQuantity());
-        assertEquals((long)10, (long)pack6.getQuantity());
+        assertEquals(10, pack3.getCode(), 0.0001);
+        assertEquals(1, pack4.getQuantity(), 0.0001);
+        assertEquals(1, pack5.getQuantity(), 0.0001);
+        assertEquals(10, pack6.getQuantity(), 0.0001);
     }
 
     @Test
@@ -57,11 +57,11 @@ public class PackTest
         Pack pack6 = new Pack(13, "A", 1, 1, 10);
 
         assertEquals(null, pack1.getCode());
-        assertEquals((long)0, (long)pack2.getCode());
-        assertEquals((long)10, (long)pack3.getCode());
-        assertEquals((long)1, (long)pack4.getQuantity());
-        assertEquals((long)1, (long)pack5.getQuantity());
-        assertEquals((long)10, (long)pack6.getQuantity());
+        assertEquals(0, pack2.getCode(), 0.0001);
+        assertEquals(10, pack3.getCode(), 0.0001);
+        assertEquals(1, pack4.getQuantity(), 0.0001);
+        assertEquals(1, pack5.getQuantity(), 0.0001);
+        assertEquals(10, pack6.getQuantity(), 0.0001);
     }
 
     @Test
@@ -71,8 +71,8 @@ public class PackTest
         Pack pack3 = new Pack(10, "A", 1, 1, 10);
 
         assertEquals(null, pack1.getCode());
-        assertEquals((long)0, (long)pack2.getCode());
-        assertEquals((long)10, (long)pack3.getCode());   
+        assertEquals(0, pack2.getCode(), 0.0001);
+        assertEquals(10, pack3.getCode(), 0.0001);   
     }
 
     @Test
@@ -100,7 +100,7 @@ public class PackTest
         Pack.registerProduct(10, "A", 1, 1); 
 
         pack1.correctInvadidCode(10);
-        assertEquals((long)10, (long)pack1.getCode());  
+        assertEquals(10, pack1.getCode(), 0.0001);  
     }
 
     @Test
@@ -108,8 +108,8 @@ public class PackTest
         Pack pack1 = new Pack(10, "A", 1, 1, 0);        
         Pack pack2 = new Pack(11, "A", 1, 1, 10);
 
-        assertEquals((long)1, (long)pack1.getQuantity());
-        assertEquals((long)10, (long)pack2.getQuantity());       
+        assertEquals(1, pack1.getQuantity(), 0.0001);
+        assertEquals(10, pack2.getQuantity(), 0.0001);       
     }
 
     @Test
@@ -126,8 +126,8 @@ public class PackTest
         Pack pack1 = new Pack(10, "A", 0, 1, 10);        
         Pack pack2 = new Pack(11, "A", 1, 1, 10);
 
-        assertEquals((long)0, (long)pack1.getWeight());
-        assertEquals((long)1, (long)pack2.getWeight());       
+        assertEquals(0, pack1.getWeight(), 0.0001);
+        assertEquals(1, pack2.getWeight(), 0.0001);       
     }
 
     @Test
@@ -135,8 +135,8 @@ public class PackTest
         Pack pack1 = new Pack(10, "A", 0, 1, 10);        
         Pack pack2 = new Pack(11, "A", 1, 1, 10);
 
-        assertEquals((long)0, (long)pack1.getVolume());
-        assertEquals((long)1, (long)pack2.getVolume());       
+        assertEquals(0, pack1.getVolume(), 0.0001);
+        assertEquals(1, pack2.getVolume(), 0.0001);       
     }
 
     @Test
@@ -165,31 +165,31 @@ public class PackTest
     public void testGetTotalWeight(){
         Pack pack1 = new Pack(10, "A", 2, 1, 10);
 
-        assertEquals((long)20, (long)pack1.getTotalWeight());
+        assertEquals(20, pack1.getTotalWeight(), 0.0001);
         
         pack1.removeQuantity(5);
-        assertEquals((long)10, (long)pack1.getTotalWeight());
+        assertEquals(10, pack1.getTotalWeight(), 0.0001);
 
         pack1.addQuantity(15);
-        assertEquals((long)40, (long)pack1.getTotalWeight());  
+        assertEquals(40, pack1.getTotalWeight(), 0.0001);  
         
         pack1.removeQuantity(10);
-        assertEquals((long)20, (long)pack1.getTotalWeight());
+        assertEquals(20, pack1.getTotalWeight(), 0.0001);
     }
     
     @Test
     public void testGetTotalVolume(){
         Pack pack1 = new Pack(10, "A", 1, 4, 10);
 
-        assertEquals((long)40, (long)pack1.getTotalVolume());
+        assertEquals(40, pack1.getTotalVolume(), 0.0001);
         
         pack1.removeQuantity(5);
-        assertEquals((long)20, (long)pack1.getTotalVolume());
+        assertEquals(20, pack1.getTotalVolume(), 0.0001);
 
         pack1.addQuantity(15);
-        assertEquals((long)80, (long)pack1.getTotalVolume());  
+        assertEquals(80, pack1.getTotalVolume(), 0.0001);  
         
         pack1.removeQuantity(10);
-        assertEquals((long)40, (long)pack1.getTotalVolume());
+        assertEquals(40, pack1.getTotalVolume(), 0.0001);
     }
 }

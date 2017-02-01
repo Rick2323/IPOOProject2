@@ -1,14 +1,12 @@
 /**
- * Classe utilizada para a gestão dos camiões.
- * Permite carregar e descarregar os camiões com contentores. Leva-los à inspecção
- * e saber quantos quilometros dista a ultima.
+ * Representa um camião, no qual se pode carregar e descarregar um contentor de cada vez. Este camião pode também movimentar-se entre vários pontos.
  * 
  * @author 160221052  Ricardo Carmo.
  * @author 160221072  Miguel Lobato.
- * @version 31/1/2017
+ * @version 1/2/2017
  * 
- */public class Lorry
-{
+ */
+public class Lorry{
     private String designation;
     private int code;
     private Container container;

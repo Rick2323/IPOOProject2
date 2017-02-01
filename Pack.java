@@ -1,5 +1,5 @@
 /**
- * Pack representa um conjunto de unidades de um produto;
+ * Pack representa um conjunto de unidades de um produto e o código deste;
  *
  * @author 160221052  Ricardo Carmo.
  * @author 160221072  Miguel Lobato.
@@ -11,12 +11,12 @@ public class Pack
     private int quantity;
     private static ProductManagement productManagement = new ProductManagement();
 
-    public Pack(Integer code, int quantity){
+    public Pack(Integer code, int quantity){ //cria um pack de um produto já registado
         if(codeIsValid(code) && productManagement.productIsRegisted(code))
             this.code = code;
         else{
             this.code = null;
-            System.out.println("O Código Introduzido É Inválido, Como Tal É Necessario Que Este Seja Corrigido!");
+            System.out.println("O Código Introduzido É Inválido, Como Tal É Necessário Que Este Seja Corrigido!");
         }
 
         if(quantityIsValid(quantity))
@@ -25,10 +25,10 @@ public class Pack
             this.quantity = 1;
     }
 
-    public Pack(Integer code, String name, double weight, double volume, int quantity){
-        if(codeIsValid(code)){
-            this.code = code;            
+    public Pack(Integer code, String name, double weight, double volume, int quantity){//cria um pack e regista o produto no ato da criação
+        if(codeIsValid(code)){            
             registerProduct(code, name, weight, volume);
+            this.code = code;            
         }
         else{
             this.code = null;

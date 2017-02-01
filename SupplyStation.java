@@ -1,20 +1,13 @@
 import java.util.*;//ser mais preciso
 /**
- * Esta classe representa um estação de abastecimento
- * 
- * Esta classe utiliza um objecto da classe Coordinates para definir a sua posição.
- * 
- * Esta classe utiliza um objecto da classe Storage para armazenar os seus produtos.
- * 
- * Esta classe utiliza um objecto da classe Parking para criar e gerir o seu parque de estacionamento..
- * 
- * Produz um texto com a informação sobre o centro de abastecimento.
+ * Representa um estação de abastecimento, esta cria packs de produtos que estejam registados para serem colocados em stock. 
+ * Estes packs podem posteriormente ser colocados em contentores para serem movimentados.
  * 
  * @author 160221052  Ricardo Carmo.
  * @author 160221072  Miguel Lobato.
- * @version 31/1/2017
- * 
- */public class SupplyStation
+ * @version 1/2/2017
+ */
+public class SupplyStation
 {
     private String name;
     private Coordinates position;
@@ -43,9 +36,9 @@ import java.util.*;//ser mais preciso
 
     }
     
-    public ParkingLot getParking(){
+    /*public ParkingLot getParking(){
         return  parking;
-    }
+    }*/
 
     private void createEmptyContainers(int ammountOfEmptyContainers){
         Container importContainer = null;
@@ -56,13 +49,22 @@ import java.util.*;//ser mais preciso
     }              
 
     /**
-     * Permite modificar o nome da estação de abastecimento
+     * Permite modificar o nome da estação de abastecimento.
      * 
-     * @param  name   O nome da estação de abastecimento
+     * @param  name   O nome da estação de abastecimento.
      * 
      */public void setName(String name){    
         if(name != null)
             this.name = name;
+    }
+    
+    /**
+     * Devolve o nome da estação de abastecimento.
+     * 
+     * @return  nome da estação de abastecimento.
+     */
+    public String getName(){
+        return name;
     }
     
     /**
@@ -86,8 +88,8 @@ import java.util.*;//ser mais preciso
     }
 
     /**
-     * Permite descarregar um camião, e decidir se se manter o contentor no camiao ou no parque da loja e se esse contentor é para se descarregado na sua 
-     * totalidade ou apenas um pack
+     * Permite descarregar o contentor de um camião, e decidir se se quer manter o contentor no camiao ou no parque da loja e se esse contentor é para ser 
+     * descarregado na sua totalidade ou apenas um pack
      * 
      * @param  lorry    O camião a descarregar.
      * @param  code     O codigo do pack a descarregar dado por um numero inteiro.
@@ -95,7 +97,8 @@ import java.util.*;//ser mais preciso
      * @param  keepContainerInLorry  Se o contentor fica ou não no camião 
      * @param  full     Se o contentor é para ser esvaziado na totalidade.
      * 
-     */public void unloadLorry(Lorry lorry, int code, int quantity, boolean keepContainerInLorry, boolean full){
+     */
+    public void unloadLorry(Lorry lorry, int code, int quantity, boolean keepContainerInLorry, boolean full){
         if(lorry != null)
             if(position.compareCoordinates(lorry)){ 
                 if(lorry.hasContainer()){
@@ -133,38 +136,13 @@ import java.util.*;//ser mais preciso
     }
 
     /**
-     * Permite descarregar completamente o contentor no armazem da loja.
+     * Permite carregar o camião com produtos da estação de abastecimento.
      * 
-     * @param   containerCode    O codigo do contentor dado por um número inteiro.
-     * 
-     *//*public void unloadContainerFully(int containerCode){
-    ArrayList<Pack> packsToStorage = new ArrayList<Pack>();        
-    packsToStorage.addAll(parking.unloadContainerFully(containerCode));
-
-    ArrayList<Pack> packsToRemove = new ArrayList<Pack>();
-
-    if(packsToStorage != null && !packsToStorage.isEmpty())
-    for(Pack pack: packsToStorage)
-    if(salesList.productCanBeSold(pack.getCode())){
-    storage.importPack(pack);
-    packsToRemove.add(pack);                    
-    }
-
-    packsToStorage.removeAll(packsToRemove);
-
-    if(!packsToStorage.isEmpty())
-    for(Pack pack: packsToStorage)
-    parking.loadContainer(containerCode, pack);
-    }*/
-
-    /**
-     * Permite carregar um camião com produtos da estaçao de abastecimento.
-     * 
-     * @param  lorry   Um camião a ser carregado.
-     * @param  code    O codigo de um produto dado por um numero real.
-     * @param  quantity  A quantidade de um produto dado por um número real.
-     * 
-     */public void loadLorry(Lorry lorry, int code, int quantity){
+     * @param  lorry   O camião a ser carregado.
+     * @param  code    O código do produto a carregar.
+     * @param  quantity  A quantidade de produto que se quer carregar.
+     */
+    public void loadLorry(Lorry lorry, int code, int quantity){
         if(lorry != null)
             if(position.compareCoordinates(lorry)){ 
                 if(lorry.hasContainer()){
@@ -192,11 +170,12 @@ import java.util.*;//ser mais preciso
     }
 
     /**
-     * Permite adicionar produtos ao centro de distribuição.
+     * Permite adicionar pack à estação de abastecimento.
      * 
-     * @param  code   O codigo do produto dado por um numero inteiro.
-     * @param  quantity  A quantidade de um produto dado por um número inteiro.
-     */public void addPackToStorage(int code, int quantity){
+     * @param  code   O código do produto que se quer adicionar.
+     * @param  quantity  A quantidade de produto que se quer adicionar.
+     */
+    public void addPackToStorage(int code, int quantity){
         if(ProductManagement.productIsRegisted((Integer) code)){
             Pack importPack = new Pack(code, quantity);
             storage.importPack(importPack);
@@ -206,19 +185,19 @@ import java.util.*;//ser mais preciso
     }
 
     /**
-     * Produz um texto da informação sobre a estação de abastecimento.
+     * Produz um texto com a informação da estação de abastecimento.
      * 
      * @return  Um texto com a informação sobre a estação de abastecimento.
-     * 
-     */public String toString(){         
+     */
+    public String toString(){         
         return "****** Lista de Informação Sobre a Estação de Abastecimento ******\n" + "Designação: " + name + "\n"
         + position.toString() + "\n\n" + parking.toString() + "\n\n" + storage.toString();
     }
 
     /**
      * Mostra no ecrã a informação sobre a estação de abastecimento.
-     * 
-     */public void show(){
+     */
+    public void show(){
         System.out.println(toString());
     }
 }
