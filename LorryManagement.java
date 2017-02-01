@@ -16,6 +16,11 @@ public class LorryManagement
     {
     }
 
+    /**
+     * Regista o camião indicado no HasSet 
+     * 
+     * @param lorry O a ser registado
+     */
     public void registerLorry(Lorry lorry){
         if(lorry != null)
             if(registedLorrys.isEmpty())//se o HashMap estiver vazio adiciona-o logo 
@@ -31,7 +36,14 @@ public class LorryManagement
             System.out.println("Contentor Inválido");
     }
 
-    private boolean lorryIsRegisted(Integer code){
+    /**
+     * Verifica se um camião já está registado, usando o código do mesmo.
+     * 
+     * @param code Código do camião.
+     * 
+     * @return Retorna verdadeiro se houver um camião com o mesmo código já registado.
+     */
+    public boolean lorryIsRegisted(Integer code){ //é public para ser usado nos testes
         if(codeIsValid(code))
             for(Lorry lorry: registedLorrys)
                 if(lorry.getCode() == code)
@@ -39,7 +51,7 @@ public class LorryManagement
         return false;
     }
 
-    private boolean lorryIsRegisted(Lorry lorry){
+    private boolean lorryIsRegisted(Lorry lorry){//Verifica se um camião já está registado, usando o código em sí.
         if(lorry != null && registedLorrys.contains(lorry))
             return true;
         else
@@ -60,6 +72,11 @@ public class LorryManagement
         return null;
     }
 
+    /**
+     * Anula o registo previo de um camião através do seu código.
+     * 
+     * @param code O código do camião.
+     */
     public void unregisterLorry(Integer code){
         if(codeIsValid(code))
             if(lorryIsRegisted(code))
@@ -96,6 +113,16 @@ public class LorryManagement
         return false;
     }
 
+    /**
+     * Devolve uma String com a informação dos camiões a uma dada distância(fornecida pelo utilizador)
+     * de um ponto de Coordenadas(também fornecidas pelo utilizador).
+     * 
+     * @param latitude Coordenada do ponto.
+     * @param longitude Coordenada do ponto.
+     * @param distance Distância ao ponto.
+     * 
+     * @return Uma String com a informação.
+     */
     public String toStringLorrysWithin(double latitude,double longitude, double distance){
         if(distance > 0){
             double lorryDistance = 0.0;
@@ -120,6 +147,14 @@ public class LorryManagement
         return null;
     }
 
+    /**
+     * Mostra no ecrã a informação dos camiões a uma dada distância(fornecida pelo utilizador)
+     * de um ponto de Coordenadas(também fornecidas pelo utilizador).
+     * 
+     * @param latitude Coordenada do ponto.
+     * @param longitude Coordenada do ponto.
+     * @param distance Distância ao ponto.
+     */
     public void showLorrysWithin(double latitude,double longitude, double distance){
         System.out.println(toStringLorrysWithin(latitude, longitude, distance));
     }
@@ -137,9 +172,9 @@ public class LorryManagement
     }
 
     /**
-     * Mostra no ecrã toda informação sobre os contentores registados.
-     * 
-     */public void showAllRegistedContainers(){
+     * Mostra no ecrã toda informação sobre os camiões registados.
+     */
+    public void showAllRegistedLorrys(){
         System.out.println(toStringAllLorrys());
     }
 
@@ -151,7 +186,12 @@ public class LorryManagement
         return listOfLorrys;
     }
 
-    private String lorrysThatNeedInspection(){
+    /**
+     * Devolve uma String com a informação dos camiões que precisão de inspeção.
+     * 
+     * @return @return Uma String com a informação.
+     */
+    public String lorrysThatNeedInspection(){
         ArrayList<Lorry> listOfLorrys = getListOfLorrysThatNeedInspection();
         String exportString = "*** Lista De Camiões Que Necessitam Ser Inspecionados ***";
 
@@ -165,15 +205,35 @@ public class LorryManagement
         return exportString;
     }
 
+    /**
+     * Mostrano ecrã a informação dos camiões que precisão de inspeção.
+     */
     public void showLorrysThatNeedInspection(){
         System.out.println(lorrysThatNeedInspection());
     }
 
+    /**
+     * Devolve o número de camiões considerados novos.
+     * 
+     * @return número de camiões considerados novos.
+     */
     public int getNumberOfNewLorrys(){
         return (int) registedLorrys.stream().filter(lorry -> lorry.isNew()).count();
     }
 
+    /**
+     * Devolve o número de camiões considerados vellhos.
+     * 
+     * @return número de camiões considerados novos.
+     */
     public int getNumberOfOldLorrys(){
         return (int) registedLorrys.stream().filter(lorry -> lorry.isOld()).count();
+    }
+    
+    /**
+     * Limpa o HasMap dos camiões registados, é usado para testes.
+     */
+    public static void clearRegistedProducts(){
+        registedLorrys.clear();    
     }
 }

@@ -14,8 +14,8 @@ import java.util.*; //ser mais preciso
  * 
  */public class Shop
 {
-    
-private String name;
+
+    private String name;
     private Storage storage;
     private ParkingLot parking;
     private Coordinates position;

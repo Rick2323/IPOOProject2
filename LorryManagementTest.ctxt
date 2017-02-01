@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.params=
+comment0.target=LorryManagementTest()
+comment0.text=\r\n\ Construtor\ default\ para\ a\ classe\ de\ teste\ LorryManagementTest\r\n
+comment1.params=
+comment1.target=void\ setUp()
+comment2.params=
+comment2.target=void\ tearDown()
+comment3.params=
+comment3.target=void\ testRegisterLorry()
+comment4.params=
+comment4.target=void\ testLorryIsRegisted()
+comment5.params=
+comment5.target=void\ testUnregisterLorry()
+comment6.params=
+comment6.target=void\ testGetNumberOfNewLorrys()
+comment7.params=
+comment7.target=void\ testGetNumberOfOldLorrys()
+comment8.params=
+comment8.target=void\ testClearRegistedProducts()
+numComments=9

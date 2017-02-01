@@ -31,14 +31,14 @@ public class ProductManagement
      * @param   weight  Peso Unitário.
      * @param   volume  Volume Unitário.
      */  
-    public void registerProduct(Integer code, String name, double weight, double volume){
+    public static void registerProduct(Integer code, String name, double weight, double volume){
         if(isValidProductInformation(code, name, weight, volume))
             registedProducts.put(code , name + "/" + weight + "/" + volume);
         else 
             System.out.println("Parâmetros Inválidos!");
     }
 
-    private boolean isValidProductInformation (Integer code, String name, double weight, double volume){
+    private static boolean isValidProductInformation (Integer code, String name, double weight, double volume){
         if(codeIsValid(code) && name != null && weight > 0 && volume > 0)
             return true;
         else
@@ -84,8 +84,20 @@ public class ProductManagement
         else
             System.out.println("Código Inválido!");
     }
+    
+    /**
+     * Limpa o HasMap dos produtos registados, é usado para testes.
+     */
+    public static void clearRegistedProducts(){
+        registedProducts.clear();
+    }
 
-    private String registedProductString(){
+    /**
+     * Devolve a informação dos produtos registados.
+     * 
+     * @return Devolve uma String com a informação.
+     */
+    public String registedProductString(){
         String exportString = "***** Lista de Produtos Registados *****\n";
 
         if(!registedProducts.isEmpty())
@@ -98,6 +110,9 @@ public class ProductManagement
         return exportString;   
     }
 
+    /**
+     * Mostra no ecrã informação dos produtos registados. 
+     */
     public void showRegistedProduct(){
         System.out.println(registedProductString());
     }

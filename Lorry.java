@@ -5,7 +5,7 @@
  * 
  * @author 160221052  Ricardo Carmo.
  * @author 160221072  Miguel Lobato.
- * @version 8/1/2017
+ * @version 31/1/2017
  * 
  */public class Lorry
 {
@@ -43,6 +43,11 @@
         parked = false;
     }
 
+    /**
+     * Regista um camião.
+     * 
+     * @param lorry O camião a registar.
+     */
     public static void registerLorry(Lorry lorry){
         lorryManagement.registerLorry(lorry);
     }
@@ -56,18 +61,28 @@
     public int getCode(){
         return code;
     }
-    
+
+    /**
+     * Devolve a designação do camião.
+     * 
+     * @return String com a designação.
+     */
     public String getDesignation(){
         return designation;
     }
-    
+
+    /**
+     * Permite modificar a designação do camião.
+     * 
+     * @param name Nova designação.
+     */
     public void setDesignation(String name){
         if(name != null)
             designation = name;
     }
 
     /**
-     * Permite modificar se um camiao está estacionado.
+     * Modifica se um camiao está estacionado.
      */
     public void setParked(){
         if(parked)
@@ -75,16 +90,20 @@
         else
             parked = true;
     }
-    
+
+    /**
+     * Verifica se o camião está estacionado.
+     * 
+     * @return Verdadeiro se estiver estacionado.
+     */
     public boolean isParked(){    
-         return parked;
-    }
-    
+        return parked;
+    }   
+
     /**
      * Permite carregar o camião com um contentor.
      * 
      * @param importContainer    O contentor que se quer por no camião.
-     * 
      */
     public void loadContainer(Container importContainer){        
         if(container == null){
@@ -101,8 +120,7 @@
     /**
      * Permite descarregar o contentor de um camião.
      * 
-     * @return  O contentor descarregado se ele existir.
-     * 
+     * @return  O contentor descarregado se o camião tiver algum carregado previamente.
      */
     public Container unloadContainer(){        
         if(container != null){
@@ -117,19 +135,36 @@
     }
 
     /**
-     * Permite levar um camião à inspecção.
-     * 
-     */public void inspection(){        
+     * Permite levar um camião à inspecção(kilometersSinceLastInspection = 0).
+     */
+    public void inspection(){        
         kilometersSinceLastInspection = 0;
         numberOfInspections++;
     }
+    
+    /**
+     * Devolve o número de inspeções efetuadas.
+     * 
+     * @return Número de inspeções efetuadas.
+     */
+    public int getNumberOfInspections(){
+        return numberOfInspections;
+    }
+    
+    /**
+     * Devolve os Km desde a última inspeção.
+     * 
+     * @return Km desde a última inspeção.
+     */
+    public double getKilometersSinceLastInspection(){
+        return kilometersSinceLastInspection;
+    }
 
     /**
-     * Permite deslocar o camião se nao estiver estacionado para determinado sitio dando-lhe as coordenadas.
+     * Permite deslocar o camião se este não estiver estacionado, para determinado sítio dando-lhe as coordenadas.
      * 
      * @param  latitude   A latitude que se deseja para o camião.
      * @param  longitude  A longitude que se deseja para o camião.
-     * 
      */
     public void moveLorry(double latitude, double longitude){
         if(!parked){
@@ -145,7 +180,6 @@
      * Permite saber a latitude do camião e retorna um número real.
      * 
      * @return   A latitude do camião.
-     * 
      */
     public double getLatitude(){          //usado na classe shop
         return position.getLatitude();
@@ -162,10 +196,9 @@
     }
 
     /**
-     * Permite saber se um camião tem um contentor e retorna um valor boleano.
+     * Verifica saber se um camião tem um contentor.
      * 
-     * @return   Se tem ou não tem contentor.
-     * 
+     * @return   Verdadeiro se Tiver contentor.
      */
     public boolean hasContainer(){
         if(container != null)
@@ -173,30 +206,71 @@
         else
             return false;
     }
-    
+
+    /**
+     * Devolve o contentor do camião.
+     * 
+     * @return O contentor se o tiver, senão retorna null.
+     */
     public Container getContainer(){
         return container;
     }
 
+    /**
+     * Devolve o total de Km percorridos pelo camião.
+     * 
+     * @return O total de Km percorridos pelo camião.
+     */
     public double getTotalKilometers(){
         return totalKilometers;
     }
-    
+
+    /**
+     * Verifica de o camião é considerado novo.
+     * 
+     * @return Verdadeiro se o camião é considerado novo.
+     */
     public boolean isNew(){
         return (totalKilometers < 50000);
     }
-    
+
+    /**
+     * Verifica de o camião é considerado velho.
+     * 
+     * @return Verdadeiro se o camião é considerado velho.
+     */
     public boolean isOld(){
         return (totalKilometers > 1000000);
     }
-    
+
+    /**
+     * Verifica de o camião precida de inspeção.
+     * 
+     * @return Verdadeiro se precisar de inspeção.
+     */
     public boolean needsInspection(){
         return (kilometersSinceLastInspection > 10000);
     }
 
     /**
+     * Move o camião até passar o total de Km fornecido como parâmetro, usado para testes.
+     * 
+     * @param totalKm total de Km que o camião terá de fazer.
+     */
+    public void moveLorryToReach(double totalKm){
+        double currentLatitude = getLatitude();        
+        double currentLongitude = getLongitude();
+        while(getTotalKilometers() < totalKm){
+            moveLorry(0, 0);
+            moveLorry(0, 180);
+        }
+        moveLorry(currentLatitude, currentLongitude);
+    }
+
+    /**
      * Produz um texto informativo sobre um camião.
      * 
+     * @return String com o texto informativo.
      */
     public String toString(){
         String containerInformation = "";
@@ -207,12 +281,11 @@
             containerInformation = "Nenhum Contentor Disponível";
         return  "*** Informação Sobre o Camião ***\n" + "Designação: " + designation + "\nNúmero: " + code + "\n" + containerInformation + "\n" + position.toString() 
         + "\n" + "Total Quilómetros Percorridos: " + totalKilometers +"Km"+ "\nQuilómetros Percorridos Desde a Última Inspecção: " 
-        + kilometersSinceLastInspection +"Km"+ "\nNúmero de Inspecções: " + numberOfInspections + "\nEstacionado? : " + parked;
+        + kilometersSinceLastInspection +"Km"+ "\nNúmero de Inspecções: " + getNumberOfInspections() + "\nEstacionado? : " + parked;
     }
 
     /**
-     * Mostra no ecrã a informação sobre o camião.
-     * 
+     * Mostra no ecrã a informação sobre o camião. 
      */
     public void show(){
         System.out.println(toString());

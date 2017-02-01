@@ -7,7 +7,7 @@
  * 
  * @author 160221052  Ricardo Carmo.
  * @author 160221072  Miguel Lobato.
- * @version 8/1/2017
+ * @version 31/1/2017
  * 
  */
 public class Garage

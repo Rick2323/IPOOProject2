@@ -1,15 +1,15 @@
 import java.util.*;//ser mais preciso
 /**
  * Container implementa um contentor a que será dado um número de codigo.
- * Cada contentor tem uma determinada capacidade em termos de peso (Kg) e volume (cm3).
+ * Cada contentor tem uma capacidade de 22000Kg , 33000000cm^3 e espaço para 10 Packs.
  * 
  * Cada contentor estará vazio no acto de criação.
  * 
- * Esta classe utiliza um array de objectos da classe Packs, que representa os packs existemdes no contentor.
+ * Esta classe utiliza um ArrayList de objectos da classe Packs, que representa os packs existemdes no contentor.
  * 
  * @author 160221052  Ricardo Carmo.
  * @author 160221072  Miguel Lobato.
- * @version 8/1/2017
+ * @version 31/1/2017
  */
 
 public class Container
@@ -23,8 +23,7 @@ public class Container
 
     public Container(Integer code)
     {        
-
-        if(code != null && code >= 0 && !containerIsRegisted(code)){
+        if(code != null && code > 0){
             this.code = code;
             registerContainer(this);
         }
@@ -32,9 +31,6 @@ public class Container
             this.code = null;
             System.out.println("O Código Introduzido É Inválido, Como Tal É Necessario Que Este Seja Corrigido!");
         }
-
-        //listOfPacks = new Pack[10]; // Máximo 10 packs por contentor
-        //numberOfPacks = 0;
 
         listOfPacks = new ArrayList<Pack>();
         weightCapacity = 22000; //Kg
@@ -47,13 +43,15 @@ public class Container
         return code!=null;
     }
 
+    /**
+     * Método usado pelo ulitizador para corrigir o código do pack.
+     * 
+     * @return   O codigo do contentor
+     */
     public void correctInvadidCode(Integer code){
-        if(code != null || code >= 0)
+        if(code != null && code > 0)
             if(this.code == null)
-                if(!containerIsRegisted(code))
                     this.code = code;
-                else
-                    System.out.println("Um COntentor Com Este Código Já Se Encontra Registado!");
             else
                 System.out.println("O Código Atual Não É Inválido!");
         else
@@ -74,10 +72,9 @@ public class Container
     }
 
     /**
-     * Percorre o número de produtos que existe no contentor e devolve-nos um número real
-     * que representa o peso  total em Kg dos produtos que estão no contentor.
+     * Devolve o peso total que o contentor transporta.
      * 
-     * @return    Peso total em quilogramas dos produtos que estão no contentor.
+     * @return  O peso total em quilogramas dos produtos que estão no contentor.
      */
     public double ocuppiedWeight(){
         if(containerHasValidCode()){
@@ -90,10 +87,9 @@ public class Container
     }
 
     /**
-     * Permite obter a capacidade restante de cada contentor em quilogramas (peso)e retorna-o como um número real.
+     * Devolve a capacidade(peso) disponível.
      *
      *@return    A capacidade total restante do contentor em quilogramas (peso) . 
-     *
      */
     public double availableWeight(){
         if(containerHasValidCode())
@@ -102,10 +98,10 @@ public class Container
     }
 
     /**
-     * Percorre o número de produtos existente no contentor e dá-nos o volume total ocupado do contentor em cm3. Devolve-nos um número real.
+     * Devolve o volume total que o contentor transporta.
      * 
      * 
-     * @return     O volume total ocupado do contentor em cm3.
+     * @return   O volume total em cm^3 dos produtos que estão no contentor.
      */
     public double ocuppiedVolume(){
         if(containerHasValidCode()){
@@ -118,9 +114,9 @@ public class Container
     }
 
     /**
-     * Permite obter a capacidade restante do contentor em cm3 (volume)e devolve-nos um número real.
+     * Devolve a capacidade(volume) disponível.
      * 
-     * @return     A capacidade total restante do contentor em cm3 . 
+     * @return     A capacidade total restante do contentor (volume). 
      */
     public double availableVolume(){
         if(containerHasValidCode())
@@ -129,7 +125,7 @@ public class Container
     }
 
     /**  
-     * Permite carregar o contentor. Faz a validação do produto e verifica se o mesmo cabe em peso e volume no contentor.
+     * Permite carregar o contentor. Faz a validação do pack e verifica se o mesmo cabe em peso e volume no contentor.
      * Devolve um texto no caso do produto não existir ou não caber no contentor.
      * 
      * @param   pack  Um objecto da classe Pack.
@@ -152,7 +148,7 @@ public class Container
     }
 
     /**
-     * Permite descarregar o contentor, para tal é fornecido o código e a quantidade do pack. Só é retirado do contentor um pack que tenha exatamente o mesmo codigo e quantidade  
+     * Permite descarregar o contentor, para tal é fornecido o código e a quantidade do pack. Só é retirado do contentor um pack que tenha exatamente o mesmo codigo e quantidade.  
      * 
      * @param   code    O código do produto.
      * @param   quantity    A quantidade do produto.
@@ -187,7 +183,7 @@ public class Container
 
     private boolean hasError(Integer code, int quantity){
         boolean error=false;
-        if(code == null || code < 0){
+        if(code == null || code <= 0){
             System.out.print("Código Inválido!");
             error= true;
         }
@@ -221,7 +217,7 @@ public class Container
     /**
      * Descarrega totalmente o contentor. 
      * 
-     * @return devolve um array com os packs que estavam dentro do contentor
+     * @return devolve um ArrayList com os packs que estavam dentro do contentor
      */    
     public ArrayList<Pack> unloadContainerFully(){
         if(containerHasValidCode()){
@@ -284,51 +280,51 @@ public class Container
 
     //Código dos Contentores
 
-    private boolean codeIsValid(Integer code){
-        if(code >= 0 && code != null)
+    private static boolean codeIsValid(Integer code){
+        if(code > 0 && code != null)
             return true;
         else
             return false;
     }
 
-    public void registerContainer(Container container){
+    /**
+     * Regista os contentores que recebe como parâmetro num HasSet.
+     * 
+     * @param container O Contentor a ser registado.
+     */
+    public static void registerContainer(Container container){
         if(container != null)
-            if(registedContainers.isEmpty())//se o HashMap estiver vazio adiciona-o logo 
-                registedContainers.add(container);
-
-            else{ 
-                if(!containerIsRegisted(container) && !containerIsRegisted(container.getCode()))//vai ver se não há contentores repetidos
-                    registedContainers.add(container);
-                else
-                    System.out.println("O Contentor Já Se Encontra Registado!"); 
-            }
+            registedContainers.add(container);
         else
             System.out.println("Contentor Inválido");
     }
-
-    private boolean containerIsRegisted(Integer code){
-        if(codeIsValid(code))
-            for(Container container: registedContainers)
-                if(container.getCode() == code)
-                    return true;
-        return false;
+    
+    /**
+     * Devolve o número de contentores registados.
+     * 
+     * @return O número de contentores registados.
+     */
+    public static int getNumberOfRegistedContainers(){
+        return registedContainers.size();
     }
 
-    private boolean containerIsRegisted(Container container){
-        if(container != null && registedContainers.contains(container))
-            return true;
-        else
-            return false;
-    }
-
-    public void unregisterContainer(Integer code){
-        if(codeIsValid(code))
-            if(containerIsRegisted(code))
-                registedContainers.remove(code);
-            else
-                System.out.println("O Contentor Não Está Registado!");
+    /**
+     * Anula o registo de um contentor, é usado o código do mesmo para esse efeito.
+     * 
+     * @param O código do contentore que se pretende anular o registo.
+     */
+    public static void unregisterContainer(Container container){
+        if(container != null)
+                registedContainers.remove(container);
         else
             System.out.println("Código Inválido!");        
+    }
+    
+    /**
+     * Limpa o HasSet dos contentores registados, é usado para testes.
+     */
+    public static void clearRegistedContainers(){
+        registedContainers.clear();
     }
 
     public static int getFreeContainerCode(){

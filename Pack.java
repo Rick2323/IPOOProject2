@@ -3,7 +3,7 @@
  *
  * @author 160221052  Ricardo Carmo.
  * @author 160221072  Miguel Lobato.
- * @version 8/1/2017
+ * @version 31/1/2017
  */
 public class Pack
 {    
@@ -26,9 +26,10 @@ public class Pack
     }
 
     public Pack(Integer code, String name, double weight, double volume, int quantity){
-        registerProduct(code, name, weight, volume);
-        if(codeIsValid(code) && productManagement.productIsRegisted(code))
-            this.code = code;
+        if(codeIsValid(code)){
+            this.code = code;            
+            registerProduct(code, name, weight, volume);
+        }
         else{
             this.code = null;
             System.out.println("O Código Introduzido É Inválido, Como Tal É Necessario Que Este Seja Corrigido!");
@@ -111,8 +112,10 @@ public class Pack
      * @return  O nome do produto.
      */
     public String getName(){
-        if(packHasValidCode())
-            return productManagement.getProductInformation(code).split("/")[0]; 
+        if(packHasValidCode()){
+            if(productManagement.getProductInformation(code) != null)
+                return productManagement.getProductInformation(code).split("/")[0]; 
+        }
         else 
             System.out.println("Código Inválido!");
         return null;
@@ -124,8 +127,10 @@ public class Pack
      * @return  O peso unitário do produto.
      */
     public double getWeight(){
-        if(packHasValidCode())
-            return Double.parseDouble(productManagement.getProductInformation(code).split("/")[1]);
+        if(packHasValidCode()){
+            if(productManagement.getProductInformation(code) != null)
+                return Double.parseDouble(productManagement.getProductInformation(code).split("/")[1]);
+        }
         else 
             System.out.println("Código Inválido!");
         return 0.0;
@@ -137,8 +142,10 @@ public class Pack
      * @return  O volume unitário do produto.
      */
     public double getVolume(){
-        if(packHasValidCode())
-            return Double.parseDouble(productManagement.getProductInformation(code).split("/")[2]); 
+        if(packHasValidCode()){
+            if(productManagement.getProductInformation(code) != null)
+                return Double.parseDouble(productManagement.getProductInformation(code).split("/")[2]);
+        }
         else 
             System.out.println("Código Inválido!");
         return 0.0;

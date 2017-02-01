@@ -32,10 +32,11 @@ public class productManagementTest
     @After
     public void tearDown()
     {        
+        productManagement.clearRegistedProducts();
     }
 
     @Test
-    public void registerProduct(){
+    public void testRegisterProduct(){
         assertEquals(true, productManagement.productIsRegisted(1));        
         assertEquals(false, productManagement.productIsRegisted(-1));        
         assertEquals(false, productManagement.productIsRegisted(2));        
@@ -44,7 +45,7 @@ public class productManagementTest
     }
     
     @Test
-    public void getProductInformation(){
+    public void testGetProductInformation(){
         assertEquals("A/1.0/1.0", productManagement.getProductInformation(1));        
         assertEquals(null, productManagement.getProductInformation(-1));        
         assertEquals(null, productManagement.getProductInformation(2));        
@@ -53,7 +54,7 @@ public class productManagementTest
     }
     
     @Test
-    public void productIsRegisted(){
+    public void testProductIsRegisted(){
         assertEquals(true, productManagement.productIsRegisted(1));        
         assertEquals(false, productManagement.productIsRegisted(-1));        
         assertEquals(false, productManagement.productIsRegisted(2));        
@@ -62,7 +63,7 @@ public class productManagementTest
     }
     
     @Test
-    public void unregisterProduct(){
+    public void testUnregisterProduct(){
         productManagement.unregisterProduct(1);
         assertEquals(false, productManagement.productIsRegisted(1)); 
         productManagement.unregisterProduct(-1);
